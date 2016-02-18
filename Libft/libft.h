@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2015/12/29 15:50:17 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/01/30 13:09:07 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 /*
 **	Unasked functions
 */
+int					ft_squareroot(int n);
 int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_strnextoccur(unsigned int i, char const *s, char c);
