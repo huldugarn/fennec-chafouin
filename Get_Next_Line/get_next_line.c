@@ -6,69 +6,96 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 12:32:37 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/02/16 15:52:53 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/02/18 17:00:38 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
+#include <stdio.h> // a supp
 
-char			*ft_newline(char *buffer)
+void				gnl_copyni(const char *buffer, char *dst, int n, int i)
 {
-	static char	*n;
-	int			b;
-	char		*newline;
-	int			u;
+	int				d;
 
-	b = 0;
-	while (buffer[b] != '\n' && buffer[b] != '\0')
-		b++;
-	(n == NULL) ? (u = 0) : (u = ft_strlen(n));
-	if (!(newline = (char*)ft_memalloc(u + b + 1)))
-			return (NULL);
-	newline[b] = '\0';
-	newline = n;
-	free(n);
-//	ft_putstr("H\n");
-//	ft_putstr("buffer :");
-//	ft_putstr(buffer);
-//	ft_putstr("\n");
-	(u == 0) ? (newline = buffer) : (newline = ft_strjoin(newline, buffer));
-//	ft_putstr("I\n");
-//	ft_putstr(newline);
-//	ft_putstr(" <- newline\n");
-	if (buffer[b] == '\n')
+	d = 0;
+	while (n > 0)
 	{
-		if (!(n = (char*)malloc(BUFF_SIZE - b)))
-			return (NULL);
-		n = &buffer[b + 1];
+		dst[d] = buffer[i + d];
+		d++;
+		n--;
 	}
-//	ft_putstr("J\n");
-	return (newline);
+	dst[d] = '\0';
+}
+
+char				**gnl_split(char *buffer)
+{
+	char			**tab;
+	unsigned long	i;
+
+	if (!(tab = (char**)malloc(sizeof(char *) * 3)))
+		return (NULL);
+	i = 0;
+	while (buffer[i] != '\n' && buffer[i] != '\0')
+		i++;
+	if (!(tab[0] = (char *)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	if (!(tab[1] = (char *)malloc(sizeof(char) * (BUFF_SIZE - i))))
+		return (NULL);
+	gnl_copyni(buffer, tab[0], (int)sizeof(tab[0]) - 1, 0);
+	if (i == sizeof(buffer))
+		tab[1] = NULL;
+	else
+		gnl_copyni(buffer, tab[1], (int)sizeof(tab[1]) - 1, i + 1);
+	tab[2] = NULL;
+	return (tab);
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	int			r;
-	char		b[BUFF_SIZE + 1];
-	char		*p;
+	int				r;
+	char			b[BUFF_SIZE + 1];
+	char			**t;
+//	char			*p;
+	static char		*s;
 
-	if (BUFF_SIZE < 1 || fd < 0)
+	if (BUFF_SIZE == 0 || fd < 0)
 		return (-1);
-	if ((r = read(fd, b, BUFF_SIZE)) == -1)
-		return (-1);
-	b[r] = '\0';
-//	ft_putstr("E\n");
-	p = ft_newline(b);
-//	ft_putstr("K\n");
-//	ft_putnbr(ft_strlen(p));
-//	if (!(*line = (char*)ft_memalloc(ft_strlen(p) + 1)))
-//		return (0);
-//	ft_putstr("L\n");
-	line = &p;
-//	ft_putstr("M\n");
-	ft_putstr(*line);
-//	ft_putstr("\n");
-//	ft_putstr("N\n");
-	return (r == 0 ? 0 : 1);
+//	printf("A1\n");
+	while ((r = read(fd, b, BUFF_SIZE)))
+	{
+//		printf("B1 : r = %i\n", r);
+		b[r] = '\0';
+//		printf("B2 : b = %s\n", b);
+		t = gnl_split(b); // a protéger 
+		printf("B3 : t[0] = %s	t[1] = %s\n", t[0], t[1]);
+		if (t[1] == NULL)
+		{
+//			printf("D0 : line = %s\n", *line);
+			printf("D1 : s = %s\n", s);
+			if (!s && !line)
+			{
+				*line = t[0];
+			}
+			else
+			{
+		//		if (s)
+		//			p = ft_strjoin(s, t[0]);
+		//		else
+					*line= ft_strjoin(*line, t[0]);
+			}
+			printf("D2 : p = %s\n", *line);
+//			*line = p;
+//			printf("D : line = %s\n", *line);
+			printf("E1\n");
+//			free(s);
+		}
+		else
+		{
+			printf("D22\n");
+			s = t[1];
+			return (r == 0 ? 0 : 1);
+		}
+	}
+	return (-1);
 }
