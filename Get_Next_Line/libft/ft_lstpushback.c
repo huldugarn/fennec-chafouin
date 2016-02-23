@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_lstpushback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 14:44:15 by rle-corr          #+#    #+#             */
-/*   Updated: 2015/11/24 15:17:56 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/02/23 16:20:49 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/02/23 16:24:53 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+t_list	*ft_lstpushback(t_list **list, t_list *new)
 {
-	if (c >= 'a' && c <= 'z')
-		c = c - 32;
-	return (c);
+	t_list	*cursor;
+
+	cursor = *list;
+	if (*list == NULL)
+		*list = new;
+	else
+	{
+		while (cursor->next != NULL)
+			cursor = cursor->next;
+		cursor->next = new;
+	}
+	return (*list);
 }

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/09 12:34:14 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/02/23 14:41:22 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/02/23 12:17:23 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/02/23 16:16:04 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 8
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-t_list	*find_fd(t_list **alst, int fd);
-char	*froin_jee(char *content, char *buffer, int r);
-int		get_next_line(int const fd, char **line);
+char	*ft_strnjoin(char const *s1, char const *s2, size_t len)
+{
+	int		n;
+	char	*s_join;
+	char	*p;
 
-#endif
+	n = ft_strlen(s1) + len++;
+	s_join = ft_strnew(n);
+	p = s_join;
+	if (s_join)
+	{
+		while (*s1)
+			*s_join++ = *s1++;
+		while (*s2 && --len > 0)
+			*s_join++ = *s2++;
+		return (s_join - (s_join - p));
+	}
+	return (NULL);
+}

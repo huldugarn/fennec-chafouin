@@ -5,52 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/20 10:42:48 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/02/20 16:48:30 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/02/23 09:42:23 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/02/23 16:31:31 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft/libft.h"
 
-t_doc		t_doc_init(int fd, char *str)
+t_list	*find_fd(t_list **alst, int fd)
 {
-	t_doc	new_doc;
+	t_list	*cursor;
 
-	new_doc.fd = fd;
-	new_doc.lines = ft_strsplit(str, '\n');
-	new_doc.i = 0;
-	new_doc.next = NULL;
-	return (new_doc);
+	cursor = *alst;
+	if (cursor)
+	{
+		while (cursor)
+		{
+			if (fd == (int)cursor->content_size)
+				return (cursor);
+			cursor = cursor->next;
+		}
+	}
+	cursor = ft_lstnew("\0", 1);
+	cursor->content_size = fd;
+	ft_lstpushback(alst, cursor);
+	return (cursor);
 }
 
-int			get_next_line(int const fd, char **line)
+char	*froin_jee(char *content, char *buffer, int r)
+{
+	char *ptr;
+
+	ptr = content;
+	content = ft_strnjoin(content, buffer, r);
+	free(ptr);
+	return (content);
+}
+
+int		get_next_line(int fd, char **line)
 {
 	char			b[BUFF_SIZE + 1];
-	char			*str;
 	int				r;
-	char			*tmp;
-	static t_doc	doc;
+	static t_list	*xfd = NULL;
+	t_list			*fd_list;
+	char			*ptr;
 
-	if (fd < 0 || !line || read(fd, b, 0))
-		return(-1);
-	str = ft_strnew(1);
-	while ((r = read(fd, b, BUFF_SIZE)))
-	{
-		b[r] = '\0';
-		tmp = str;
-		str = ft_strjoin(str, b);
-		free(tmp);
-	}
-	if (doc.i == 0)
-		doc = t_doc_init(fd, str);
-	while (doc.lines[doc.i] != NULL)
-	{
-		*line = doc.lines[doc.i];
-		free(doc.lines[doc.i++]);
-		return (1);
-	}
-	if (doc.lines[doc.i] == NULL)
-		free(doc.lines);
-	return (0);
+	if (fd < 0 || !line || read(fd, b, 0) < 0)
+		return (-1);
+	fd_list = xfd;
+	xfd = find_fd(&fd_list, fd);
+	while (!ft_strchr(xfd->content, '\n') && (r = read(fd, b, BUFF_SIZE)))
+		xfd->content = froin_jee(xfd->content, b, r);
+	r = 0;
+	while (((char *)xfd->content)[r] && ((char *)xfd->content)[r] != '\n')
+		++r;
+	*line = ft_strndup(xfd->content, r);
+	if (((char *)xfd->content)[r] == '\n')
+		++r;
+	ptr = xfd->content;
+	xfd->content = ft_strdup(xfd->content + r);
+	free(ptr);
+	xfd = fd_list;
+	return (r ? 1 : 0);
 }

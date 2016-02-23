@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/01/30 13:09:07 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/02/23 16:25:49 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,7 @@ int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_strnextoccur(unsigned int i, char const *s, char c);
 char				*ft_strndup(const char *s, size_t n);
+char				*ft_strnjoin(char const *s1, char const *s2, size_t len);
+t_list				*ft_lstpushback(t_list **list, t_list *new);
+
 #endif
