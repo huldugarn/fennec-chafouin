@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/01/30 13:09:07 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/02/26 15:55:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstpushback(t_list **list, t_list *new);
 
 /*
 **	Unasked functions
@@ -99,6 +100,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_squareroot(int n);
 int					ft_isupper(int c);
 int					ft_islower(int c);
-int					ft_strnextoccur(unsigned int i, char const *s, char c);
+int					ft_strnextc(unsigned int i, char const *s, char c);
 char				*ft_strndup(const char *s, size_t n);
+char				*ft_strnjoin(char const *s1, char const *s2, size_t len);
 #endif
