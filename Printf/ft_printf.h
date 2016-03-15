@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/02/27 15:14:53 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/15 11:19:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+
+typedef struct		s_opt
+{
+	int				nata;	//	next argument to access
+	int				altf;	//	# alternate conversion from
+	int				zpad;	//	0 zero padding
+	int				bpad;	//	- blank padding
+	int				asig;	//	  aligned signed numbers
+	int				esig;	//	+ explicit signed numbers
+	int				tsep;	//	' thousands separator
+	int				mfwd;	//	minimum field width
+	int				lmod;	//	length modifier
+}					t_opt;
+
+typedef struct		s_arg
+{
+	int				i;		//	indice
+	char			type;	//	type de conversion
+	t_opt			opt;	//	options & attributs
+}
 
 void	va_start(va_list vl, derniere);
 type	va_arg(va_list vl, type);

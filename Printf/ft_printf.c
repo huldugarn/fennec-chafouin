@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/10 16:19:03 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/15 11:19:22 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,31 @@ int				o_nata(char *c)
 //	Option 2 : Flags -- A CORRIGER !
 //	Fonction qui vérifie s'il existe un ou plusieurs arguments [flags] valides.
 //	Renvoie le cumul de valeurs de flags ou -1 si anomalie de flag.
-int				o_flag(char *c)
+int				o_flag(char *c, t_pf **opt)
 {
-	int 		n;
-
 	if (*c != '#' && *c != '0' && *c != '-' &&
 		*c != ' ' && *c != '+' && *c != ''')
 		return (0);
-	n = o_flag(c + 1);
-	if (n >= 64)
-		return (-1);
+	o_flag(c + 1, opt);
 	if (*c == ''')
-		return (1 + n);
+		opt->tsep = 1;
 	if (*c == '+')
-		return (2 + n);
-	if (*c == ' ')
-		return (4 + n);
+	{
+		opt->esig = 1;
+		opt->asig = 0;
+	}
+	if (*c == ' ' && opt->esig == 0)
+		opt->asig = 1;
 	if (*c == '-')
-		return (8 + n);
-	if (*c == '0')
-		return (16 + n);
+	{
+		opt->bpad = 1;
+		opt->zpad = 0;
+	}
+	if (*c == '0' && opt->bpad == 0)
+		opt->zpad = 1;
 	if (*c == '#')
-		return (32 + n);
+		opt->altf = 1;
+	return (1);
 }
 
 //	Option 3 : Minimum Field Width
@@ -128,12 +131,27 @@ t_list			list(t_list **blist, const char * restrict format, int p)
 	}
 }
 
+//	fonction qui initialise la structure "OPTIONS"
+int				opt_ini(t_opt **opt)
+{
+	opt->nata == 0;
+	opt->altf == 0;
+	opt->zpad == 0;
+	opt->bpad == 0;
+	opt->asig == 0;
+	opt->esig == 0;
+	opt->tsep == 0;
+	opt->mfwd == 0;
+	opt->lmod == 0;
+}
+
+//	fonction principale
 int				ft_printf(const char * restrict format, ...)
 {
 	va_list		vl;
 	t_list		*next;
 	t_list		*blist;
-	int			n;
+	int			n;		//	nombre de caractères imprimés
 	
 	if (!format)
 		return (-1);

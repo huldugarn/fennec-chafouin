@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/02/26 15:55:19 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/15 15:47:53 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,21 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
 /*
-**	Bonus
+**	ft_maths
+*/
+
+int					ft_absolu(int n);
+int					ft_power(int n, int e);
+int					ft_squareroot(int a);
+
+/*
+**	ft_unicode
+*/
+
+
+
+/*
+**	Mono-linked lists	
 */
 typedef struct		s_list
 {
