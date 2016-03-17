@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/15 15:47:53 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/17 11:08:04 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+/*
+**	Structures
+*/
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
 /*
 **	Part 1
@@ -80,7 +90,6 @@ void				ft_putnbr_fd(int n, int fd);
 /*
 **	ft_maths
 */
-
 int					ft_absolu(int n);
 int					ft_power(int n, int e);
 int					ft_squareroot(int a);
@@ -88,18 +97,16 @@ int					ft_squareroot(int a);
 /*
 **	ft_unicode
 */
-
-
+char				**ft_unicode(unsigned int n);
+char				**ft_unimask2(char *b, int l);
+char				**ft_unimask3(char *b, int l);
+char				**ft_unimask4(char *b, int l);
+t_list				**ft_itob(unsigned int i);
+char				*ft_btoa(t_list **binary);
 
 /*
-**	Mono-linked lists	
+**	Mono-linked lists
 */
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));

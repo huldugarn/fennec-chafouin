@@ -5,94 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 15:07:15 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/15 17:26:21 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/03/17 10:46:43 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/03/17 11:45:41 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		**ft_itob(unsigned int i)
+char		**ft_unicode(unsigned int n)
 {
-	t_list	*bit;
-	t_list	**binary;
+	char	*b;
+	int		l;
 
-	bit = NULL;
-	binary = b;
-	while (i > 0)
-	{
-		ft_lstadd(binary, ft_lstnew(i % 2, 1));
-		i = i/2;
-	}
-	return (binary);
+	b = ft_btoa(ft_itob(n));
+	l = ft_strlen(b);
+	if (l < 12)
+		return (ft_unimask2(b, l));
+	if (l >= 12 && l < 16)
+		return (ft_unimask3(b, l));
+	if (l >= 16)
+		return (ft_unimask4(b, l));
+	return (NULL);
 }
 
-char		*ft_btoa(t_list **binary)
+char		**ft_unimask2(char *b, int l)
 {
-	t_list	*cursor;
-	int		l;
-	char	*str;
-	int		i;
-
-	cursor = *binary;
-	l = 0;
-	while (cursor->next != NULL)
-	{
-		l++;
-		cursor = cursor->next;
-	}
-	cursor = *binary;
-	str = ft_strnew(l);
-	i = 0;
-	while (i < l)
-	{
-		str[i] = cursor->content;
-		cursor = cursor->next;
-		i++;
-	}
-	return (str);
-}
-
-int			*ft_unicode(unsigned int n)
-{
-ch:w
-	   ar	*tab[5];
-	char	*binary;
-	int		l;
+	char	*tab[2];
+	char 	**p;
 	int		i;
 	int		j;
 
-	j = 4;
-	while (j > 0)
-		tab[j--] = '\0';
-	binary = ft_btoa(ft_itob(n));
-	l = ft_strlen(binary);
-	if (l >= 8)
-	{
-		tab[0] = 11000000;
-		tab[1] = 10000000;
-		while (l > 0)
-		{
-			if (i < 2)
-			{
-				i = 8;
-				j--;
-			}
-			tab[j][i] = binary[l--];
-		}
-	}
-	if (l >= 12)
-		tab[0] = 11100000;
-	if (l >= 16)
-		tab[0] = 11110000;
+	tab[0] = "11000000";
+	tab[1] = "10000000";
+	i = 1;
+	j = 7;
 	while (l > 0)
 	{
-		if (l)
-		tab[1][i] = binary[l];
+		if (j < 2)
+		{
+			j = 7;
+			i--;
+		}
+		tab[i][j--] = b[l--];
 	}
+	p = tab;
+	return (p);
 }
 
-char	**ft_uniconv(char *binary, int l)
+char		**ft_unimask3(char *b, int l)
 {
-	
+	char	*tab[3];
+	char	**p;
+	int		i;
+	int		j;
+
+	tab[0] = "11100000";
+	tab[1] = "10000000";
+	tab[2] = "10000000";
+	i = 2;
+	j = 7;
+	while (l > 0)
+	{
+		if (j < 2)
+		{
+			j = 7;
+			i--;
+		}
+		tab[i][j--] = b[l--];
+	}
+	p = tab;
+	return (p);
+}
+
+char		**ft_unimask4(char *b, int l)
+{
+	char	*tab[4];
+	char	**p;
+	int		i;
+	int		j;
+
+	tab[0] = "11110000";
+	tab[1] = "10000000";
+	tab[2] = "10000000";
+	tab[3] = "10000000";
+	i = 3;
+	j = 7;
+	while (l > 0)
+	{
+		if (j < 2)
+		{
+			j = 7;
+			i--;
+		}
+		tab[i][j--] = b[l--];
+	}
+	p = tab;
+	return (p);
 }

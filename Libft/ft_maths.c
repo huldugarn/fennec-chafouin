@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 12:43:29 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/15 15:42:40 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/03/17 11:02:57 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/03/17 11:13:16 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_power(int n, int e)
 
 	r = 1;
 	if (e == 0)
-		return (1)
+		return (1);
 	if (e < 0)
 		return (1 / ft_power(n, ft_absolu(e)));
 	while (e > 0)
@@ -31,13 +31,14 @@ int		ft_power(int n, int e)
 		r = r * n;
 		--e;
 	}
+	return (r);
 }
 
-int	ft_squareroot(int a)
+int		ft_squareroot(int a)
 {
 	int x;
 
-	x= 1;
+	x = 1;
 	if (a == 4)
 		return (2);
 	if (a == 9)

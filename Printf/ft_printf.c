@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/15 11:19:22 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/17 16:00:07 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int				o_nata(char *c)
 	return (-1);
 }
 
-//	Option 2 : Flags -- A CORRIGER !
+//	Option 2 : Flags
 //	Fonction qui vérifie s'il existe un ou plusieurs arguments [flags] valides.
-//	Renvoie le cumul de valeurs de flags ou -1 si anomalie de flag.
 int				o_flag(char *c, t_pf **opt)
 {
 	if (*c != '#' && *c != '0' && *c != '-' &&
@@ -148,28 +147,47 @@ int				opt_ini(t_opt **opt)
 //	fonction principale
 int				ft_printf(const char * restrict format, ...)
 {
-	va_list		vl;
-	t_list		*next;
-	t_list		*blist;
 	int			n;		//	nombre de caractères imprimés
+	va_list		vl;
 	
 	if (!format)
 		return (-1);
-	next = ft_lstnew("\0", 1);
-	blist = next;
-	while (format != '\0')
-	{
-		if (format == '%')
-		{
-
-		}
-		else
-		format++;
-	}
+	n = 0;
 	va_start(vl, format);
-	while (next->content = va_arg(vl, ))
+	n = ft_core(format, vl, n)
+	va_end(vl);
 	return (n);
 }
 
-while (ft_isdigit(string++))
+//	reacteur
+int			ft_core(format, vl, n)
+{
+	t_arg	*o_list;
 
+	o_list = lecture(format);
+	return(ecriture(format, vl, o_list));
+}
+
+//	lecture
+t_arg		*lecture(const char * restrict format, int	i)
+{
+	t_arg	*o_init;
+	t_arg	**o_list;
+
+	o_init = NULL;
+	o_list = *o_init;
+	while (format[i] != '\0')
+	{
+		if (format[i] != '%')
+			i++;
+		gestionnaire_d_options(format[i], o_list);
+	}
+	return (o_list);
+}
+
+//	écriture
+int			ecriture(format, vl, o_list)
+{
+
+	return (nombre de caractères imprimés)
+}
