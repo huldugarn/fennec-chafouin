@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/17 16:00:07 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/24 18:15:01 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int				o_lmod(char *c)
 
 //	Argument requis : Conversion type
 //	Vérifie la validité du type de conversion
+//
+//	ft_memnchr(str, n)
 int				r_ctyp(char *c)
 {
 	if (c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'p' || c == 'n' ||

@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 10:46:43 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/17 11:45:41 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/24 17:42:27 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ char		**ft_unicode(unsigned int n)
 {
 	char	*b;
 	int		l;
-
+/*
+ *	nombre de bits : (attention, power doit gerer le resultat en long)
+ *	while (ft_power(2, i++) < n);
+ *	
+*/
 	b = ft_btoa(ft_itob(n));
 	l = ft_strlen(b);
 	if (l < 12)
@@ -31,7 +35,7 @@ char		**ft_unicode(unsigned int n)
 char		**ft_unimask2(char *b, int l)
 {
 	char	*tab[2];
-	char 	**p;
+	char	**p;
 	int		i;
 	int		j;
 

@@ -6,7 +6,7 @@
 #    By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:57:32 by rle-corr          #+#    #+#              #
-#    Updated: 2016/03/17 10:57:44 by rle-corr         ###   ########.fr        #
+#    Updated: 2016/03/24 16:33:31 by rle-corr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_NAME = ft_atoi.c		ft_bzero.c		ft_isalnum.c    ft_isalpha.c \
 		   ft_strnequ.c		ft_strnew.c		ft_strnextc.c	ft_strnjoin.c\
 		   ft_strnstr.c		ft_strrchr.c	ft_strsplit.c	ft_strstr.c \
 		   ft_strsub.c		ft_strtrim.c	ft_toupper.c	ft_tolower.c \
-		   get_next_line.c	ft_maths.c		ft_unicode.c	ft_uniconv.c
+		   get_next_line.c	ft_maths.c		ft_unicode.c	ft_uniconv.c \
+		   ft_putchar_uni.c
 SRC_FULL = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 .PHONY: all, clean, fclean, re

@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/17 11:08:04 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/24 17:53:39 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <wchar.h>
 /*
 **	Structures
 */
+// 	typedef unsigned short wint_t;
+//  typedef unsigned short wchar_t;
 typedef struct		s_list
 {
 	void			*content;
@@ -103,6 +105,8 @@ char				**ft_unimask3(char *b, int l);
 char				**ft_unimask4(char *b, int l);
 t_list				**ft_itob(unsigned int i);
 char				*ft_btoa(t_list **binary);
+unsigned int		ft_atob(const char *str);
+void				ft_putchar_uni(wchar_t c, int fd);
 
 /*
 **	Mono-linked lists
