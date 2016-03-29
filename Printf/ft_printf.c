@@ -6,11 +6,11 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/24 18:15:01 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/29 15:36:28 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf.h" t_pf **opt
 
 //	Option 1 : Next argument to access
 //	Fonction qui verifie s'il existe un argument [next arg] valide.
@@ -58,10 +58,24 @@ int				o_flag(char *c, t_pf **opt)
 	return (1);
 }
 
-//	Option 3 : Minimum Field Width
+//	Option 3 : Taille de champs
+int				o_mfwd(char *c)
+{
+	int			i;
+
+	i = 1;
+	if (ft_isdigit(*c) && *c != '0')
+		while (ft_isdigit(*(c + i)))
+			i++;
+	else
+		return (-1);
+	return (i - 1);
+}
+
+//	Option 4  :	Précision 
 //	Vérifie si l'argument est present et renvoie sa longeur.
 //	Renvoie la longueur de l'argument ou -1 si absent.
-int				o_mfwd(char *c)
+int				o_prec(char *c)
 {
 	int			i;
 
@@ -74,7 +88,7 @@ int				o_mfwd(char *c)
 	return (i - 1);
 }
 
-//	Option 4 : Length Modifier
+//	Option 5 : Length Modifier
 //	Vérifie si un flag de taille est présent et renvoie son code, sinon 0.
 int				o_lmod(char *c)
 {

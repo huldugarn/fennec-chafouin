@@ -8,8 +8,14 @@ int	ft_pf_putn(int n, int fd, int r);
 
 int	conversion(const char * restrict format, va_list vl, int i)
 {
-	int	n;
+	int		n;
+	t_opt	*opt;
+	t_opt	**p_opt;
+	
+	opt = opt_init(&opt);
+	p_opt = *opt;
 
+	opt_attr(p_opt, format, i);
 	n = 0;
 	if (format[i + 1] == '%')
 		n = ft_pf_putc('%', 1);
@@ -22,6 +28,33 @@ int	conversion(const char * restrict format, va_list vl, int i)
 	return (n);
 }
 
+//	Initialiser la structure des options
+void	opt_init(t_opt **opt)
+{
+	opt->nata = 0;
+	opt->altf = 0;
+	opt->zpad = 0;
+	opt->bpad = 0;
+	opt->asig = 0;
+	opt->esig = 0;
+	opt->tsep = 0;
+	opt->mfwd = 0;
+	opt->prec = 0;
+	opt->lmod = 0;
+}
+
+//	Attribuer aux options leurs valeurs
+void	opt_attr(t_opt **p_opt, const char * restrict format, int i)
+{
+	int	l;
+
+	if ((l = o_nata(format[i])) >= 0)
+		p_opt->nata = ft_atoi(ft_strsub(format, i, l));
+	o_flag(format[i + l], p_opt);
+	if ((l = o))
+}
+
+//	Noyau de la fonction ft_printf
 int	pf(const char * restrict format, ...)
 {
 	int		n;
@@ -52,16 +85,7 @@ int	pf(const char * restrict format, ...)
 int	main()
 {
 	int r = 0;
-	int k = 0;
-	wchar_t	test = 220;
 	r = pf("test	:	%c\nsuivant	:	%i%%\nstring	:	%s.\n", 'U', 100, "argument");
 	ft_putnbr(r);
-	ft_pf_putc('\n', 1);
-	while (ft_power(2, k++) < test);
-	k = k / 8;
-	write(1, &test, k);
-	ft_pf_putc('\n', 1);
-//	ft_putchar_uni((wchar_t)255, 1);
-	ft_pf_putc('\n', 1);
 	return(0);
 }

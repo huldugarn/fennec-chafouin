@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/17 14:53:32 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/29 14:49:08 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_opt
 	int				esig;	//	+ explicit signed numbers
 	int				tsep;	//	' thousands separator
 	int				mfwd;	//	minimum field width
+	int				prec;	//	precision
 	int				lmod;	//	length modifier
 }					t_opt;
 
