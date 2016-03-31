@@ -6,11 +6,12 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/29 15:36:28 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/31 15:41:01 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h" t_pf **opt
+#include "ft_printf.h"
+#include "../Libft/libft.h"
 
 //	Option 1 : Next argument to access
 //	Fonction qui verifie s'il existe un argument [next arg] valide.
@@ -20,30 +21,30 @@ int				o_nata(char *c)
 	int			n;
 
 	if (*c == '$')
-		return 0;
+		return (1);
 	if (ft_isdigit(*c))
 	{
 		n = o_nata(c + 1);
-		return ((n == -1) ? -1 : (n + 1));
+		return ((n == 0) ? 0 : (n + 1));
 	}
-	return (-1);
+	return (0);
 }
 
 //	Option 2 : Flags
 //	Fonction qui vérifie s'il existe un ou plusieurs arguments [flags] valides.
-int				o_flag(char *c, t_pf **opt)
+int				o_flag(char *c, t_opt *opt)
 {
 	if (*c != '#' && *c != '0' && *c != '-' &&
-		*c != ' ' && *c != '+' && *c != ''')
+		*c != ' ' && *c != '+' && *c != '\'')
 		return (0);
 	o_flag(c + 1, opt);
-	if (*c == ''')
+	if (*c == '\'')
 		opt->tsep = 1;
 	if (*c == '+')
 	{
 		opt->esig = 1;
 		opt->asig = 0;
-	}
+	}	
 	if (*c == ' ' && opt->esig == 0)
 		opt->asig = 1;
 	if (*c == '-')
@@ -69,7 +70,7 @@ int				o_mfwd(char *c)
 			i++;
 	else
 		return (-1);
-	return (i - 1);
+	return (i);
 }
 
 //	Option 4  :	Précision 
@@ -108,7 +109,7 @@ int				o_lmod(char *c)
 		return (9);
 	return (0);
 }
-
+/*
 //	Argument requis : Conversion type
 //	Vérifie la validité du type de conversion
 //
@@ -206,4 +207,4 @@ int			ecriture(format, vl, o_list)
 {
 
 	return (nombre de caractères imprimés)
-}
+}*/
