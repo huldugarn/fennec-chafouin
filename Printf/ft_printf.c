@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/31 15:41:01 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/05 16:29:49 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,31 @@ int				o_nata(char *c)
 
 //	Option 2 : Flags
 //	Fonction qui vérifie s'il existe un ou plusieurs arguments [flags] valides.
-int				o_flag(char *c, t_opt *opt)
+int				o_flag(char *c, t_opt *opt, int	return_value)
 {
 	if (*c != '#' && *c != '0' && *c != '-' &&
 		*c != ' ' && *c != '+' && *c != '\'')
 		return (0);
-	o_flag(c + 1, opt);
+	return_value = o_flag(c + 1, opt, return_value);
 	if (*c == '\'')
 		opt->tsep = 1;
-	if (*c == '+')
+	else if (*c == '+')
 	{
 		opt->esig = 1;
 		opt->asig = 0;
 	}	
-	if (*c == ' ' && opt->esig == 0)
+	else if (*c == ' ' && opt->esig == 0)
 		opt->asig = 1;
-	if (*c == '-')
+	else if (*c == '-')
 	{
 		opt->bpad = 1;
 		opt->zpad = 0;
 	}
-	if (*c == '0' && opt->bpad == 0)
+	else if (*c == '0' && opt->bpad == 0)
 		opt->zpad = 1;
-	if (*c == '#')
+	else if (*c == '#')
 		opt->altf = 1;
-	return (1);
+	return (return_value + 1);
 }
 
 //	Option 3 : Taille de champs
@@ -69,7 +69,7 @@ int				o_mfwd(char *c)
 		while (ft_isdigit(*(c + i)))
 			i++;
 	else
-		return (-1);
+		return (0);
 	return (i);
 }
 
@@ -85,28 +85,20 @@ int				o_prec(char *c)
 		while (ft_isdigit(*(c + i)))
 			i++;
 	else
-		return (-1);
-	return (i - 1);
+		return (0);
+	return (i);
 }
 
 //	Option 5 : Length Modifier
-//	Vérifie si un flag de taille est présent et renvoie son code, sinon 0.
+//	Vérifie si un flag de taille est présent et renvoie sa taille.
 int				o_lmod(char *c)
 {
 	if (*c == 'h')
-		return ((*(c + 1) == 'h') ? 1 : 2);
+		return ((*(c + 1) == 'h') ? 2 : 1);
 	if (*c == 'l')
-		return ((*(c + 1) == 'l') ? 4 : 3);
-	if (*c == 'j')
-		return (5);
-	if (*c == 't')
-		return (6);
-	if (*c == 'z')
-		return (7);
-	if (*c == 'q')
-		return (8);
-	if (*c == 'L')
-		return (9);
+		return ((*(c + 1) == 'l') ? 2 : 1);
+	if (*c == 'j' || *c == 't' || *c == 'z' || *c == 'q' || *c == 'L')
+		return (1);
 	return (0);
 }
 /*

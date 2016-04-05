@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/31 13:07:32 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/05 16:32:40 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct		s_opt
 	int				tsep;	//	' thousands separator
 	int				mfwd;	//	minimum field width
 	int				prec;	//	precision
-	int				lmod;	//	length modifier
+	char			*lmod;	//	length modifier
 }					t_opt;
 
 typedef struct		s_arg
