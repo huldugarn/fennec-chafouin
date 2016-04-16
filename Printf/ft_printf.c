@@ -6,197 +6,38 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/05 16:29:49 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/16 16:37:12 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "../Libft/libft.h"
 
-//	Option 1 : Next argument to access
-//	Fonction qui verifie s'il existe un argument [next arg] valide.
-//	Renvoie la longueur de l'argument ou -1 si non valide.
-int				o_nata(char *c)
+int	ft_printf(const char * restrict format, ...)
 {
-	int			n;
+	int             rv;
+	va_list         vl;
+	static  t_opt   *opt = NULL;
+	int             L;
+	int             i;
 
-	if (*c == '$')
-		return (1);
-	if (ft_isdigit(*c))
-	{
-		n = o_nata(c + 1);
-		return ((n == 0) ? 0 : (n + 1));
-	}
-	return (0);
-}
-
-//	Option 2 : Flags
-//	Fonction qui vérifie s'il existe un ou plusieurs arguments [flags] valides.
-int				o_flag(char *c, t_opt *opt, int	return_value)
-{
-	if (*c != '#' && *c != '0' && *c != '-' &&
-		*c != ' ' && *c != '+' && *c != '\'')
-		return (0);
-	return_value = o_flag(c + 1, opt, return_value);
-	if (*c == '\'')
-		opt->tsep = 1;
-	else if (*c == '+')
-	{
-		opt->esig = 1;
-		opt->asig = 0;
-	}	
-	else if (*c == ' ' && opt->esig == 0)
-		opt->asig = 1;
-	else if (*c == '-')
-	{
-		opt->bpad = 1;
-		opt->zpad = 0;
-	}
-	else if (*c == '0' && opt->bpad == 0)
-		opt->zpad = 1;
-	else if (*c == '#')
-		opt->altf = 1;
-	return (return_value + 1);
-}
-
-//	Option 3 : Taille de champs
-int				o_mfwd(char *c)
-{
-	int			i;
-
-	i = 1;
-	if (ft_isdigit(*c) && *c != '0')
-		while (ft_isdigit(*(c + i)))
-			i++;
-	else
-		return (0);
-	return (i);
-}
-
-//	Option 4  :	Précision 
-//	Vérifie si l'argument est present et renvoie sa longeur.
-//	Renvoie la longueur de l'argument ou -1 si absent.
-int				o_prec(char *c)
-{
-	int			i;
-
-	i = 1;
-	if (*c == '.')
-		while (ft_isdigit(*(c + i)))
-			i++;
-	else
-		return (0);
-	return (i);
-}
-
-//	Option 5 : Length Modifier
-//	Vérifie si un flag de taille est présent et renvoie sa taille.
-int				o_lmod(char *c)
-{
-	if (*c == 'h')
-		return ((*(c + 1) == 'h') ? 2 : 1);
-	if (*c == 'l')
-		return ((*(c + 1) == 'l') ? 2 : 1);
-	if (*c == 'j' || *c == 't' || *c == 'z' || *c == 'q' || *c == 'L')
-		return (1);
-	return (0);
-}
-/*
-//	Argument requis : Conversion type
-//	Vérifie la validité du type de conversion
-//
-//	ft_memnchr(str, n)
-int				r_ctyp(char *c)
-{
-	if (c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'p' || c == 'n' ||
-		c == 'd' || c == 'D' || c == 'u' || c == 'U' || c == 'i' || c == '%' ||
-		c == 'o' || c == 'O' || c == 'x' || c == 'X' || c == 'a' || c == 'A' ||
-		c == 'e' || c == 'E' || c == 'f' || c == 'F' || c == 'g' || c == 'G')
-		return (1);
-	return (0);
-}
-
-//fonction qui dit si le character est un flag
-int				is_flag(char c)
-{
-	if (ft_isdigit(c))
-		//check if following characters comply to [next arg] option format
-}
-
-
-
-//fonction qui parcours le format a partir de la position p pour associer chaque % a un élément de liste
-t_list			list(t_list **blist, const char * restrict format, int p)
-{
-	t_list	*next;
-
-	next = ft_lstnew("\0", 1);
-	blist = next;
-	while (format[p] != '\0')
-	{
-		if (format[p] == )
-		p++;
-	}
-}
-
-//	fonction qui initialise la structure "OPTIONS"
-int				opt_ini(t_opt **opt)
-{
-	opt->nata == 0;
-	opt->altf == 0;
-	opt->zpad == 0;
-	opt->bpad == 0;
-	opt->asig == 0;
-	opt->esig == 0;
-	opt->tsep == 0;
-	opt->mfwd == 0;
-	opt->lmod == 0;
-}
-
-//	fonction principale
-int				ft_printf(const char * restrict format, ...)
-{
-	int			n;		//	nombre de caractères imprimés
-	va_list		vl;
-	
-	if (!format)
-		return (-1);
-	n = 0;
+	rv = 0;
 	va_start(vl, format);
-	n = ft_core(format, vl, n)
-	va_end(vl);
-	return (n);
-}
-
-//	reacteur
-int			ft_core(format, vl, n)
-{
-	t_arg	*o_list;
-
-	o_list = lecture(format);
-	return(ecriture(format, vl, o_list));
-}
-
-//	lecture
-t_arg		*lecture(const char * restrict format, int	i)
-{
-	t_arg	*o_init;
-	t_arg	**o_list;
-
-	o_init = NULL;
-	o_list = *o_init;
+	opt = o_init(opt);
+	L = 0;
+	i = 0;
 	while (format[i] != '\0')
 	{
-		if (format[i] != '%')
-			i++;
-		gestionnaire_d_options(format[i], o_list);
+		if (format[i] == '%')
+		{
+			L = 1 + o_attr(format, (i + 1), opt);
+			i = i + L;
+			rv = rv + c_hub(format, i, vl);
+		}
+		else
+			rv = rv + ft_pf_putc(format[i], 1);
+		i++;
 	}
-	return (o_list);
+	va_end(vl);
+	return(rv);
 }
-
-//	écriture
-int			ecriture(format, vl, o_list)
-{
-
-	return (nombre de caractères imprimés)
-}*/

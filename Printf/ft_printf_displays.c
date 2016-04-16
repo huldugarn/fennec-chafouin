@@ -6,11 +6,11 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:11:13 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/05 14:06:54 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/16 16:00:40 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//	#include "ft_printf.h"
+#include "ft_printf.h"
 #include <unistd.h>
 
 int		ft_pf_putc(char c, int fd)
