@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 16:38:38 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/16 16:38:52 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 11:44:59 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ char	c_type(char *c)
 		return (*c);
 }
 
-int		c_hub(const char * restrict format, int i, va_list vl)
+int		c_hub(const char * restrict f, int i, t_opt *o, va_list vl)
 {
-	int		return_value;
+	int		rv;
 
-	return_value = 0;
-	if (format[i] == '%')
-		return_value = ft_pf_putc('%', 1);
-	if (format[i] == 'c')
-		return_value = ft_pf_putc(va_arg(vl, int), 1);
-	if (format[i] == 'i' || format[i + 1] == 'd')
-		return_value = ft_pf_putn(va_arg(vl, int), 1, 0);
-	if (format[i] == 's')
-		return_value = ft_pf_puts(va_arg(vl, char*), 1);
-	return (return_value);
+	rv = 0;
+	if (f[i] == '%')
+		rv = ft_pf_putc('%', 1);
+	if (f[i] == 'c' || f[i] == 'C')
+		rv = (f[i] == 'c') ? (c_char(vl, o)) : (c_CHAR(vl, o));
+	if (f[i] == 'i' || f[i + 1] == 'd')
+		rv = ft_pf_putn(va_arg(vl, int), 1, 0);
+	if (f[i] == 's')
+		rv = ft_pf_puts(va_arg(vl, char*), 1);
+	return (rv);
 }

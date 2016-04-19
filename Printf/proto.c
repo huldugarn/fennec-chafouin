@@ -8,7 +8,7 @@
 int	main()
 {
 	int r = 0;
-	r = ft_printf("test : [%33$#0- -+\'6.8hhs]_\n", "exemple");
+	r = ft_printf("test : [%33$#0 +\'2.8hhc]_\n", 'k');
 	ft_putnbr(r);
 	return(0);
 }

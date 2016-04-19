@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/16 16:37:12 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 11:44:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_printf(const char * restrict format, ...)
 		{
 			L = 1 + o_attr(format, (i + 1), opt);
 			i = i + L;
-			rv = rv + c_hub(format, i, vl);
+			rv = rv + c_hub(format, i, opt, vl);
 		}
 		else
 			rv = rv + ft_pf_putc(format[i], 1);

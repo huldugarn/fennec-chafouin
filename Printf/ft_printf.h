@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/16 16:36:21 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 11:44:06 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,18 @@ int					o_prec(char *c);
 int					o_lmod(char *c);
 
 /*
-**	ft_printf_conversions.c	| Conversions
+**	ft_printf_conversions1.c| Conversions
 */
 char				c_type(char *c);
-int					c_hub(const char * restrict format, int i, va_list vl);
+int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
+
+/*
+**	ft_printf_conversions1.c| Conversions
+*/
+int					c_char(va_list vl, t_opt *opt);
+int					c_CHAR(va_list vl, t_opt *opt);
+int					c_string(va_list vl, t_opt *opt);
+int					c_STRING(va_list vl, t_opt *opt);
 
 /*
 **	ft_printf_displays.c	| Tools

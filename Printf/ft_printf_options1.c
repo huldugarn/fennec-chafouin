@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 15:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/16 16:12:35 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 11:44:14 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-int		ft_pf_putc(char c, int fd);
-int		ft_pf_puts(char const *s, int fd);
-int		ft_pf_putn(int n, int fd, int r);
 
 //	Initialiser la structure des options
 t_opt	*o_init(t_opt *opt)
@@ -64,7 +60,7 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 //	printf("\n	Taille de l'option LMOD : [%i]", l);
 	L = L + l;
 	opt->ctyp = *ft_strsub(format, (i + L), 1);
-//	o_disp(opt, 1);//	DISPLAY
+	o_disp(opt, 1);//	DISPLAY
 //	printf("\n	Taille totale des options : [%i]", L);
 	return (L);
 }
