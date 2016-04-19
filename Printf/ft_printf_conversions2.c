@@ -6,54 +6,43 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 11:17:07 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 12:06:59 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:06:12 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Libft/libft.h"
 #include "ft_printf.h"
 
-int		c_char(va_list vl, t_opt *opt)
+int			c_char(va_list vl, t_opt *o, int tc)
 {
-	int	rv;
+	int		r;
 
-	rv = 0;
-	if (opt->mfwd > 1 && opt->zpad == 1)
-		while (opt->mfwd-- > 1)
-			rv = rv + ft_pf_putc('0', 1);
-	rv = rv + ft_pf_putc(va_arg(vl, int), 1);
-	if (opt->mfwd > 1 && opt->bpad == 1)
-		while (opt->mfwd-- > 1)
-			rv = rv + ft_pf_putc(' ', 1);
-	return (rv);
+	r = 0;
+	if (o->mfwd > 1 && o->bpad == 0)
+		while (o->mfwd-- > 1)
+			(o->zpad == 1) ? (r += pfpc('0', 1, tc)) : (r += pfpc(' ', 1, tc));
+	r = r + pfpc(va_arg(vl, int), 1, tc);
+	if (o->mfwd > 1 && o->bpad == 1)
+		while (o->mfwd-- > 1)
+			r = r + pfpc(' ', 1, tc);
+	return (r);
 }
 
-int		c_CHAR(va_list vl, t_opt *opt)
+int			c_string(va_list vl, t_opt *o, int tc)
 {
-	int	rv;
+	int		r;
+	char	*str;
+	int		l;
 
-	rv = 0;
-	if (opt->mfwd != 0)
-		rv = ft_pf_putc(ft_toupper(va_arg(vl, int)), 1);
-	return (rv);
-}
-
-int		c_string(va_list vl, t_opt *opt)
-{
-	int	rv;
-
-	rv = 0;
-	if (opt->mfwd != 0)
-		rv = ft_pf_puts(va_arg(vl, char*), 1);
-	return (rv);
-}
-
-int		c_STRING(va_list vl, t_opt *opt)
-{
-	int	rv;
-
-	rv = 0;
-	if (opt->mfwd != 0)
-		rv = ft_pf_puts(va_arg(vl, char*), 1);
-	return (rv);
+	r = 0;
+	str = ft_strdup(va_arg(vl, char*));
+	l = ft_strlen(str);
+	if (o->mfwd > l && o->bpad == 0)
+		while (o->mfwd-- > l)
+			(o->zpad == 1) ? (r += pfpc('0', 1, tc)) : (r += pfpc(' ', 1, tc));
+	r = r + pfps(str, 1, tc);
+	if (o->mfwd > l && o->bpad == 1)
+		while (o->mfwd-- > l)
+			r = r + pfpc(' ', 1, tc);
+	return (r);
 }

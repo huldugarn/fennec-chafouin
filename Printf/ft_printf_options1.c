@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 15:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 11:44:14 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:21:57 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 	int		l;// taille de l'option
 	int		L;// taille des options
 
+	opt = o_init(opt);
 	if ((l = o_nata(&((char *) format)[i])) > 0)
 		opt->nata = ft_atoi(ft_strsub(format, i, l));
 //	printf("\n	Taille de l'option NATA : [%i]", l);
@@ -60,35 +61,35 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 //	printf("\n	Taille de l'option LMOD : [%i]", l);
 	L = L + l;
 	opt->ctyp = *ft_strsub(format, (i + L), 1);
-	o_disp(opt, 1);//	DISPLAY
+	o_disp(opt, 1, 0);//	DISPLAY
 //	printf("\n	Taille totale des options : [%i]", L);
 	return (L);
 }
 
 //	Display structure
-void	o_disp(t_opt *opt, int fd)
+void	o_disp(t_opt *opt, int fd, int tc)
 {
-	ft_pf_puts(" \n>	NATA [", fd);
-	ft_pf_putn(opt->nata, fd, 0);
-	ft_pf_puts("]\n>	ALTF [", fd);
-	ft_pf_puts(opt->altf? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	ZPAD [", fd);
-	ft_pf_puts(opt->zpad? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	BPAD [", fd);
-	ft_pf_puts(opt->bpad? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	ASIG [", fd);
-	ft_pf_puts(opt->asig? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	ESIG [", fd);
-	ft_pf_puts(opt->esig? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	TSEP [", fd);
-	ft_pf_puts(opt->tsep? "ACTIF] [       " : "     ] [INACTIF", fd);
-	ft_pf_puts("]\n>	MFWD [", fd);
-	ft_pf_putn(opt->mfwd, fd, 0);
-	ft_pf_puts("]\n>	PREC [", fd);
-	ft_pf_putn(opt->prec, fd, 0);
-	ft_pf_puts("]\n>	LMOD [", fd);
-	ft_pf_puts(opt->lmod, fd);
-	ft_pf_puts("]\n>	CTYP [", fd);
-	ft_pf_putc(opt->ctyp, fd);
-	ft_pf_puts("]\n", fd);
+	pfps(" \n>	NATA [", fd, tc);
+	pfpn(opt->nata, fd, 0);
+	pfps("]\n>	ALTF [", fd, tc);
+	pfps(opt->altf? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	ZPAD [", fd, tc);
+	pfps(opt->zpad? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	BPAD [", fd, tc);
+	pfps(opt->bpad? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	ASIG [", fd, tc);
+	pfps(opt->asig? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	ESIG [", fd, tc);
+	pfps(opt->esig? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	TSEP [", fd, tc);
+	pfps(opt->tsep? "ACTIF] [       " : "     ] [INACTIF", fd, tc);
+	pfps("]\n>	MFWD [", fd, tc);
+	pfpn(opt->mfwd, fd, 0);
+	pfps("]\n>	PREC [", fd, tc);
+	pfpn(opt->prec, fd, 0);
+	pfps("]\n>	LMOD [", fd, tc);
+	pfps(opt->lmod, fd, tc);
+	pfps("]\n>	CTYP [", fd, tc);
+	pfpc(opt->ctyp, fd, tc);
+	pfps("]\n", fd, tc);
 }

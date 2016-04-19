@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 11:44:19 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:22:36 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_printf(const char * restrict format, ...)
 {
 	int             rv;
 	va_list         vl;
-	static  t_opt   *opt = NULL;
+	t_opt			*opt;
 	int             L;
 	int             i;
 
 	rv = 0;
 	va_start(vl, format);
-	opt = o_init(opt);
+	opt = NULL;
 	L = 0;
 	i = 0;
 	while (format[i] != '\0')
@@ -35,7 +35,7 @@ int	ft_printf(const char * restrict format, ...)
 			rv = rv + c_hub(format, i, opt, vl);
 		}
 		else
-			rv = rv + ft_pf_putc(format[i], 1);
+			rv = rv + pfpc(format[i], 1, 0);
 		i++;
 	}
 	va_end(vl);

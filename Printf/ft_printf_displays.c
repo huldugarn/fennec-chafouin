@@ -6,48 +6,62 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:11:13 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/16 16:00:40 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:30:53 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <unistd.h>
 
-int		ft_pf_putc(char c, int fd)
+int		pfpc(char c, int fd, int tc)
 {
-	write(fd, &c, 1);
+	char a;
+
+	a = c;
+	if (tc == 1 && (c >= 'a' && c <= 'z'))
+	{
+		a = c - 32;
+		write(fd, &a, 1);
+	}
+	else if (tc == 2 && (c >= 'A' && c <= 'Z'))
+	{
+		a = c + 32;
+		write(fd, &a,1);
+	}
+	else
+		write(fd, &a, 1);
 	return (1);
 }
 
-int		ft_pf_puts(char const *s, int fd)
+int		pfps(char const *s, int fd, int tc)
 {
 	int	r;
 
 	r = 0;
 	while (*s != '\0')
 	{
-		ft_pf_putc(*s, fd);
+		pfpc(*s, fd, tc);
 		s++;
 		r++;
 	}
 	return (r);
 }
 
-int		ft_pf_putn(int n, int fd, int r)
+int		pfpn(int n, int fd, int r)
 {
 	if (n == -2147483648)
-		r = ft_pf_puts("-2147483648", fd);
+		r = pfps("-2147483648", fd, 0);
 	else if (n < 0)
 	{
-		r = r + ft_pf_putc('-', fd);
-		ft_pf_putn(-n, fd, r);
+		r = r + pfpc('-', fd, 0);
+		pfpn(-n, fd, r);
 	}
 	else if (n >= 10)
 	{
-		ft_pf_putn(n / 10, fd, r);
-		r = r + ft_pf_putc(n % 10 + '0', fd);
+		r = r + pfpn(n / 10, fd, r);
+		r = r + pfpc(n % 10 + '0', fd, 0);
 	}
 	else
-		r = r + ft_pf_putc(n + '0', fd);
+		r = r + pfpc(n + '0', fd, 0);
 	return (r);
 }

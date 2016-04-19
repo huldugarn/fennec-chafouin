@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 11:44:06 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:44:52 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int					ft_printf(const char * restrict format, ...);
 */
 t_opt				*o_init(t_opt *opt);
 int					o_attr(const char * restrict format, int i, t_opt *opt);
-void				o_disp(t_opt *opt, int fd);
+void				o_disp(t_opt *opt, int fd, int tc);
 
 /*
 **	ft_printf_options2.c	| Options lengths
@@ -72,18 +72,21 @@ char				c_type(char *c);
 int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
 
 /*
-**	ft_printf_conversions1.c| Conversions
+**	ft_printf_conversions2.c| Characters & Strings Conversions
 */
-int					c_char(va_list vl, t_opt *opt);
-int					c_CHAR(va_list vl, t_opt *opt);
-int					c_string(va_list vl, t_opt *opt);
-int					c_STRING(va_list vl, t_opt *opt);
+int					c_char(va_list vl, t_opt *o, int tc);
+int					c_string(va_list vl, t_opt *o, int tc);
+
+/*
+**	ft_printf_conversions3.c| Numbers Conversions
+*/
+
 
 /*
 **	ft_printf_displays.c	| Tools
 */
-int					ft_pf_putc(char c, int fd);
-int					ft_pf_puts(char const *s, int fd);
-int					ft_pf_putn(int n, int fd, int r);
+int					pfpc(char c, int fd, int tc);
+int					pfps(char const *s, int fd, int tc);
+int					pfpn(int n, int fd, int r);
 
 #endif
