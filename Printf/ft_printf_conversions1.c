@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 16:38:38 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 15:47:25 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/12 14:16:44 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			c_hub(const char * restrict f, int i, t_opt *o, va_list vl)
 	int		rv;
 	
 	rv = 0;
+	printf("=== CONVERSION - START ===\n");
 	if (f[i] == '%')
 		rv = pfpc('%', 1, 0);
 	if (f[i] == 'c' || f[i] == 'C')
@@ -37,6 +38,6 @@ int			c_hub(const char * restrict f, int i, t_opt *o, va_list vl)
 	if (f[i] == 'i' || f[i + 1] == 'd')
 		rv = pfpn(va_arg(vl, int), 1, 0);
 	if (f[i] == 's' || f[i] == 'S')
-		rv = (f[i] == 's') ? (c_string(vl, o, 0)) : (c_string(vl, o, 1));
+		rv = (o->lmod == 3) ? (c_str_s(vl, o, 0)) : (c_str_s(vl, o, 0));
 	return (rv);
 }

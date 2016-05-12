@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 10:56:52 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/24 17:53:39 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/26 13:27:05 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void				ft_putnbr_fd(int n, int fd);
 **	ft_maths
 */
 int					ft_absolu(int n);
-int					ft_power(int n, int e);
+long				ft_power(int n, int e);
 int					ft_squareroot(int a);
 
 /*

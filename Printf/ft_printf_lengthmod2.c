@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnextoccur.c                                  :+:      :+:    :+:   */
+/*   ft_printf_lengthmod2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 11:46:31 by rle-corr          #+#    #+#             */
-/*   Updated: 2015/12/03 16:45:59 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/04/28 12:33:18 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/04/28 12:39:39 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_strnextoccur(unsigned int i, char const *s, char c)
+long				*lmod_ln(va_list vl)
 {
-	unsigned int	t;
+	return(va_arg(vl, long*));
+}
 
-	t = i;
-	while (s[i] != '\0')
-	{
-		if (i == t || s[i] == c || (s[i] != c && s[i - 1] != c))
-			i++;
-		else
-			return (i);
-	}
-	return (-1);
+unsigned long long	lmod_lloux(va_list vl)
+{
+	return(va_arg(vl, unsigned long long));
+}
+
+long long			lmod_lldi(va_list vl)
+{
+	return(va_arg(vl, long long));
+}
+
+long long			*lmod_lln(va_list vl)
+{
+	return(va_arg(vl, long long*));
+}
+
+long double			lmod_Laefg(va_list vl)
+{
+	return(va_arg(vl, long double));
 }

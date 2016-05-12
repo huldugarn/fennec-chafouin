@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 15:44:52 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/12 13:51:30 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-
+# include <wchar.h>
 /*
 **							| Structures
 */
@@ -30,7 +30,7 @@ typedef struct		s_opt
 	int				tsep;	//	' thousands separator
 	int				mfwd;	//	minimum field width
 	int				prec;	//	precision
-	char			*lmod;	//	length modifier
+	int				lmod;	//	length modifier
 	char			ctyp;	//	conversion type
 }					t_opt;
 
@@ -75,7 +75,8 @@ int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
 **	ft_printf_conversions2.c| Characters & Strings Conversions
 */
 int					c_char(va_list vl, t_opt *o, int tc);
-int					c_string(va_list vl, t_opt *o, int tc);
+int					c_str_s(va_list vl, t_opt *o, int tc);
+int					c_str_l(va_list vl, t_opt *o, int tc);
 
 /*
 **	ft_printf_conversions3.c| Numbers Conversions
@@ -83,10 +84,19 @@ int					c_string(va_list vl, t_opt *o, int tc);
 
 
 /*
-**	ft_printf_displays.c	| Tools
+**	ft_printf_displays1.c	| Tools
 */
 int					pfpc(char c, int fd, int tc);
-int					pfps(char const *s, int fd, int tc);
+int					pfps(const char *c, int fd, int tc);
 int					pfpn(int n, int fd, int r);
+
+/*
+**	ft_printf_displays2.c	| Wide char
+*/
+int					wwc(int fd, void *caa, int cas);
+int					umm(int fd, wint_t wc);
+int					um2(int fd, char ca[4], wint_t wc);
+int					um3(int fd, char ca[4], wint_t wc);
+int					um4(int fd, char ca[4], wint_t wc);
 
 #endif

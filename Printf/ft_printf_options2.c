@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 15:09:36 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 14:42:45 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/12 13:44:53 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,18 @@ int				o_prec(char *c)
 int				o_lmod(char *c)
 {
 	if (*c == 'h')
-		return ((*(c + 1) == 'h') ? 2 : 1);
+		return ((*(c + 1) == 'h') ? 21 : 1);
+	if (*c == 'j')
+		return (2);
 	if (*c == 'l')
-		return ((*(c + 1) == 'l') ? 2 : 1);
-	if (*c == 'j' || *c == 't' || *c == 'z' || *c == 'q' || *c == 'L')
-		return (1);
+		return ((*(c + 1) == 'l') ? 23 : 3);
+	if (*c == 'L')
+		return (4);
+	if (*c == 'q')
+		return (5);
+	if (*c == 't')
+		return (6);
+	if (*c == 'z')
+		return (7);
 	return (0);
 }

@@ -1,24 +1,22 @@
 #include <stdio.h>
+#include <locale.h>
 #include <wchar.h>
-int	main()
+int			main()
 {
-	int		i = 42;
-	char	a = 'a';
-	wint_t	n = "ñ";
+	wint_t	wc;
+	wchar_t	*ws;
 
-//	printf("# flag	:	%#i\n", i);
-//	printf("0 flag	:	%05i test\n", i);
-//	printf("- flag	:	%5i test\n", i);
-//	printf("  flag	:	% i test\n", i);
-//	printf("+ flag	:	%+05i test\n", i);
-//	printf("' flag	:	%'i test\n", i);
-	printf("c conversions : a->%c\n", a);
-	printf("C conversions : a->%C\n", a);
-	printf("c conversions : n->%c\n", n);
-	printf("C conversions : n->%C\n", n);
-//	printf("\n",);
-//	printf("\n",);
-//	printf("\n",);
-//	printf("\n",);
+	setlocale(LC_ALL, "en_US.UTF-8");
+
+	wc = L'\u0FC7';
+	ws = L"࿇ test";
+	printf("%lc = [%u]\n", wc, (unsigned int)wc);
+	printf("࿇ = [%u]\n", (unsigned int)(ws[0]));
 	return (0);
+}
+
+int			putwc(wint_t wc)
+{
+
+	return(1);
 }

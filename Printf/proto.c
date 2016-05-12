@@ -8,7 +8,7 @@
 int	main()
 {
 	int r = 0;
-	r = ft_printf("%33$#- +\'18.8hhs%i%c", "e", 666666, 'u');
+	r = ft_printf("test :  %33$#- +\'18.8hhs t%-4cst", "alphabet", 'e');
 	ft_putnbr(r);
 	return(0);
 }

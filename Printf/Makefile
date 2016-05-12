@@ -6,7 +6,7 @@
 #    By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 16:57:32 by rle-corr          #+#    #+#              #
-#    Updated: 2016/04/19 15:46:58 by rle-corr         ###   ########.fr        #
+#    Updated: 2016/05/12 11:53:59 by rle-corr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_NAME = ft_printf.c \
 		   ft_printf_conversions1.c \
 		   ft_printf_conversions2.c \
 		   ft_printf_conversions3.c \
-		   ft_printf_displays.c \
+		   ft_printf_displays1.c \
+		   ft_printf_displays2.c \
 		   ft_printf_options1.c \
 		   ft_printf_options2.c \
 		   proto.c

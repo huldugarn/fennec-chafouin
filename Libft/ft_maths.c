@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 11:02:57 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/17 11:13:16 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/03/26 13:26:47 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		ft_absolu(int n)
 	return ((n < 0) ? -n : n);
 }
 
-int		ft_power(int n, int e)
+long		ft_power(int n, int e)
 {
-	int	r;
+	long	r;
 
 	r = 1;
 	if (e == 0)
@@ -28,7 +28,7 @@ int		ft_power(int n, int e)
 		return (1 / ft_power(n, ft_absolu(e)));
 	while (e > 0)
 	{
-		r = r * n;
+		r = r * (long)n;
 		--e;
 	}
 	return (r);

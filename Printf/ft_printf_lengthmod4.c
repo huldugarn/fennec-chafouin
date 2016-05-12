@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversions3.c                           :+:      :+:    :+:   */
+/*   ft_printf_lengthmod4.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 15:43:29 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/07 12:19:48 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/04/28 12:49:00 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/04/28 12:52:33 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Libft/libft.h"
 #include "ft_printf.h"
-/*
-int			c_unsg(va_list vl, t_opt *o)
-{
-	int		r;
 
-	if (o->mfwd > 1 && o->prec == 0)
-	return (r);
-}*/
+signed char			*lmod_hhn(va_list vl)
+{
+	return(va_arg(vl, signed char*));
+}
+
+uintmax_t			lmod_joux(va_list vl)
+{
+	return(va_arg(vl, uintmax_t));
+}
+
+intmax_t			lmod_jdi(va_list vl)
+{
+	return(va_arg(vl, intmax_t));
+}
+
+intmax_t			*lmod_jn(va_list vl)
+{
+	return(va_arg(vl, intmax_t*));
+}
+
+size_t				lmod_zoux(va_list vl)
+{
+	return(va_arg(vl, size_t));
+}

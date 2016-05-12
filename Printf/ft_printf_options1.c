@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 15:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/04/19 15:21:57 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/12 14:14:57 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_opt	*o_init(t_opt *opt)
 	opt->tsep = 0;
 	opt->mfwd = 0;
 	opt->prec = 0;
-	opt->lmod = "\0";
+	opt->lmod = 0;
 	opt->ctyp = '\0';
 	return (opt);
 }
@@ -45,24 +45,22 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 	opt = o_init(opt);
 	if ((l = o_nata(&((char *) format)[i])) > 0)
 		opt->nata = ft_atoi(ft_strsub(format, i, l));
-//	printf("\n	Taille de l'option NATA : [%i]", l);
 	L = l + o_flag(&((char *) format)[i + l], opt, 0);
-//	printf("\n	Taille de l'option FLAG : [%i]", (L - l));
 	if ((l = o_mfwd(&((char *) format)[i + L])) > 0)
 		opt->mfwd = ft_atoi(ft_strsub(format, (i + L), l));
-//	printf("\n	Taille de l'option MFWD : [%i]", l);
 	L = L + l;
 	if ((l = o_prec(&((char *) format)[i + L])) > 0)
 		opt->prec = ft_atoi(ft_strsub(format, (i + L + 1), (l - 1)));
-//	printf("\n	Taille de l'option PREC : [%i]", l);
 	L = L + l;
 	if ((l = o_lmod(&((char *) format)[i + L])) > 0)
-		opt->lmod = ft_strsub(format, (i + L), l);
+		opt->lmod = l;
 //	printf("\n	Taille de l'option LMOD : [%i]", l);
-	L = L + l;
+	if (l != 0)
+		(l > 20) ? (L = L + 2) : (L = L + 1);
 	opt->ctyp = *ft_strsub(format, (i + L), 1);
 	o_disp(opt, 1, 0);//	DISPLAY
 //	printf("\n	Taille totale des options : [%i]", L);
+	printf("=== ATTRIBUTION - OK ===\n");
 	return (L);
 }
 
@@ -88,7 +86,7 @@ void	o_disp(t_opt *opt, int fd, int tc)
 	pfps("]\n>	PREC [", fd, tc);
 	pfpn(opt->prec, fd, 0);
 	pfps("]\n>	LMOD [", fd, tc);
-	pfps(opt->lmod, fd, tc);
+	pfpn(opt->lmod, fd, 0);
 	pfps("]\n>	CTYP [", fd, tc);
 	pfpc(opt->ctyp, fd, tc);
 	pfps("]\n", fd, tc);

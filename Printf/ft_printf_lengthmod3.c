@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversions3.c                           :+:      :+:    :+:   */
+/*   ft_printf_lengthmod3.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 15:43:29 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/07 12:19:48 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/04/28 12:40:51 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/04/28 12:44:21 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Libft/libft.h"
 #include "ft_printf.h"
-/*
-int			c_unsg(va_list vl, t_opt *o)
-{
-	int		r;
 
-	if (o->mfwd > 1 && o->prec == 0)
-	return (r);
-}*/
+unsigned short		lmod_houx(va_list vl)
+{
+	return(va_arg(vl, unsigned short));
+}
+
+short				lmod_hdi(va_list vl)
+{
+	return(va_arg(vl, short));
+}
+
+short				*lmod_hn(va_list vl)
+{
+	return(va_arg(vl, short*));
+}
+
+unsigned char		lmod_hhoux(va_list vl)
+{
+	return(va_arg(vl, unsigned char));
+}
+
+char				lmod_hhdi(va_list vl)
+{
+	return(va_arg(vl, char));
+}

@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conversions3.c                           :+:      :+:    :+:   */
+/*   ft_printf_lengthmod1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 15:43:29 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/07 12:19:48 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/04/28 12:17:26 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/04/28 12:26:45 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Libft/libft.h"
 #include "ft_printf.h"
-/*
-int			c_unsg(va_list vl, t_opt *o)
-{
-	int		r;
 
-	if (o->mfwd > 1 && o->prec == 0)
-	return (r);
-}*/
+wint_t			lmod_lc(va_list vl)
+{
+	return(va_arg(vl, wint_t));
+}
+
+wchar_t			*lmod_ls(va_list vl)
+{
+	return(va_arg(vl, wchar_t*));
+}
+
+unsigned long	lmod_loux(va_list vl)
+{
+	return(va_arg(vl, unsigned long));
+}
+
+long			lmod_ldi(va_list vl)
+{
+	return(va_arg(vl, long));
+}
+
+double			lmod_laefg(va_list vl)
+{
+	return(va_arg(vl, double));
+}
