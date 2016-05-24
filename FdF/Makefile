@@ -1,19 +1,26 @@
 EXENAME=fdf
 CMPNAME=gcc
 CMPFLAG=-Wall -Werror -Wextra
-SRCNAME=
+MLXFLAG=-lmlx -framework OpenGL -framework Appkit
+SRCNAME=main.c
 OBJNAME=$(SRCNAME:.c=.o)
+
 
 
 all: $(EXENAME)
 
-$(EXENAME): objectify
+$(EXENAME): linkage
+
+linkage: objectify
+	$(CMPNAME) -o $(EXENAME) $(OBJNAME) $(CMPFLAG) $(MLXFLAG)
 
 objectify:
-	$(CMPNAME) $(CMPFLAG)
+	$(CMPNAME) -c $(SRCNAME)
 
 clean:
+	rm -f $(OBJNAME)
 
 fclean: clean
+	rm -f $(EXENAME)
 
 re: fclean all

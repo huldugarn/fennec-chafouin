@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 16:38:38 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/12 14:16:44 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:39:32 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int			c_hub(const char * restrict f, int i, t_opt *o, va_list vl)
 	if (f[i] == 'i' || f[i + 1] == 'd')
 		rv = pfpn(va_arg(vl, int), 1, 0);
 	if (f[i] == 's' || f[i] == 'S')
+	{
+		printf("o->lmod = %i", o->lmod);
 		rv = (o->lmod == 3) ? (c_str_s(vl, o, 0)) : (c_str_s(vl, o, 0));
+	}
 	return (rv);
 }

@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 15:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/12 14:14:57 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:20:40 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 	if (l != 0)
 		(l > 20) ? (L = L + 2) : (L = L + 1);
 	opt->ctyp = *ft_strsub(format, (i + L), 1);
-	o_disp(opt, 1, 0);//	DISPLAY
+//	o_disp(opt, 1, 0);//	DISPLAY
 //	printf("\n	Taille totale des options : [%i]", L);
 	printf("=== ATTRIBUTION - OK ===\n");
 	return (L);

@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 11:17:07 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/12 14:37:24 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/05/17 11:40:28 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			c_str_s(va_list vl, t_opt *o, int tc)
 	int		l;
 
 	r = 0;
+	printf(">> yo <<");
 	if (o->prec != 0)
 		str = ft_strndup(va_arg(vl, char*), o->prec);
 	else
