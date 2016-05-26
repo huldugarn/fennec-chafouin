@@ -15,7 +15,7 @@ linkage: objectify
 	$(CMPNAME) -o $(EXENAME) $(OBJNAME) $(CMPFLAG) $(MLXFLAG)
 
 objectify:
-	$(CMPNAME) -c $(SRCNAME)
+	$(CMPNAME) -c $(SRCNAME) fdf.h
 
 clean:
 	rm -f $(OBJNAME)

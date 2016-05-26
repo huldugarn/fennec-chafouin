@@ -1,35 +1,55 @@
-#include "mlx.h"
+#include "fdf.h"
 #include <stdio.h>
 
-int	ft_exit(int keycode, void *param)
+int	ft_hud(t_param *param);
+
+int	ft_exit(void *param_p)
 {
-	printf("Key event %d\n", keycode);
+	exit(0);
+	return (0);
+}
+
+int	ft_keycode_functions_index(int keycode, t_param *param)
+{
+	printf("Key event %3d\n", keycode);
+	if (keycode == 53)
+		ft_exit(param);
+	if (keycode == 34)
+		ft_hud(param);
+	return (0);
+}
+
+int	ft_hud(t_param *param)
+{
+	int		x;
+	int		y;
+
+	x = 5;
+	y = 5;
+	while (y <= 35)
+	{
+		while (x <= 210)
+		{
+			if (y == 5 || y == 35)
+				mlx_pixel_put(param->mlx, param->win, x, y, 0x00FFFFFF);
+			if (x == 5 || x == 210)
+				mlx_pixel_put(param->mlx, param->win, x, y, 0x00FFFFFF);
+			x++;
+		}
+		x = 5;
+		y++;
+	}
+	mlx_string_put(param->mlx, param->win, 15, 10, 0x00007F00, "Press ESC to quit.");
 	return (0);
 }
 
 int	main()
 {
-	void	*parameters;
-	void	*mlx;
-	void	*win;
-	int		x;
-	int		y;
+	t_param	*param;
 
-	parameters = NULL;
-//	mlx_init()
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "mlx 42");
-	y = 50;
-	while (y < 150)
-	{
-		x = 50;
-		while (x < 150)
-		{
-			mlx_pixel_put(mlx, win, x, y, 0x00FFFFFF);
-			x++;
-		}
-		y++;
-	}
-	mlx_key_hook(win, ft_exit, parameters);
-	mlx_loop(mlx);
+	param = (t_param*)malloc(sizeof(t_param) * 1);
+	param->mlx = mlx_init();
+	param->win = mlx_new_window(param->mlx, 700, 400, "mlx 42");
+	mlx_key_hook(param->win, ft_keycode_functions_index, param);
+	mlx_loop(param->mlx);
 }
