@@ -16,6 +16,33 @@ int	ft_keycode_functions_index(int keycode, t_param *param)
 		ft_exit(param);
 	if (keycode == 34)
 		ft_hud(param);
+	if (keycode == 35)
+		printf("Coordonnées du point stocké dans les paramètres :\n	x = [%i]\n	y = [%i]\n", param->x, param->y);
+	return (0);
+}
+
+int		key_hook_press(int	keycode, t_param *param)
+{
+	if (keycode == 123)
+	{
+		(param->x > 0 && param->x <= WIN_WIDTH) ? (param->x--) : (param->x = param->x + 0);
+		mlx_pixel_put(param->mlx, param->win, param->x, param->y, 0x00FFFFFF);
+	}
+	if (keycode == 124)
+	{
+		(param->x >= 0 && param->x < WIN_WIDTH) ? (param->x++) : (param->x = param->x + 0);
+		mlx_pixel_put(param->mlx, param->win, param->x, param->y, 0x00FFFFFF);
+	}
+	if (keycode == 125)
+	{
+		(param->y >= 0 && param->x < WIN_HEIGHT) ? (param->y++) : (param->y = param->y + 0);
+		mlx_pixel_put(param->mlx, param->win, param->x, param->y, 0x00FFFFFF);
+	}
+	if (keycode == 126)
+	{
+		(param->y > 0 && param->y <= WIN_HEIGHT) ? (param->y--) : (param->y = param->y + 0);
+		mlx_pixel_put(param->mlx, param->win, param->x, param->y, 0x00FFFFFF);
+	}
 	return (0);
 }
 
@@ -43,13 +70,27 @@ int	ft_hud(t_param *param)
 	return (0);
 }
 
+t_param	*ft_param_init(t_param *param)
+{
+	param = (t_param*)malloc(sizeof(t_param) * 1);
+	param->mlx = mlx_init();
+	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
+	param->x = 5;
+	param->y = 5;
+	return (param);
+}
+
+
+
 int	main()
 {
 	t_param	*param;
 
-	param = (t_param*)malloc(sizeof(t_param) * 1);
-	param->mlx = mlx_init();
-	param->win = mlx_new_window(param->mlx, 700, 400, "mlx 42");
+	param = ft_param_init(param);
+//	param = (t_param*)malloc(sizeof(t_param) * 1);
+//	param->mlx = mlx_init();
+//	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
 	mlx_key_hook(param->win, ft_keycode_functions_index, param);
+	mlx_hook(param->win, 2, (1L << 0), key_hook_press, param);
 	mlx_loop(param->mlx);
 }
