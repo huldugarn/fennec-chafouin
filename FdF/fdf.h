@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 12:10:56 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/06/21 14:32:56 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/06/28 15:00:08 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # define TILE_W 64
 # define TILE_H 64
 
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_point;
+
 typedef struct		s_image
 {
 	void			*ptr;
@@ -27,7 +34,6 @@ typedef struct		s_image
 	int				szl;
 	int				end;
 }					t_i;
-
 
 typedef struct		s_param
 {
@@ -37,9 +43,10 @@ typedef struct		s_param
 	char			*ima_data;
 	int				tile_w;
 	int				tile_h;
-	int				x;
-	int				y;
+	int				gs_x;	//	grid size x axis
+	int				gs_y;	//	grid size y axis
 	int				print;
-}					t_p;
+	char			*map_path;
+}					t_param;
 
 #endif

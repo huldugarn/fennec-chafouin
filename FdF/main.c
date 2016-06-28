@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int	ft_hud(t_p *pm);
+int	ft_hud(t_param *pm);
 
 int	ft_exit(void *pm_p)
 {
@@ -9,7 +9,7 @@ int	ft_exit(void *pm_p)
 	return (0);
 }
 
-int	ft_keycode_functions_index(int keycode, t_p *pm)
+int	ft_keycode_functions_index(int keycode, t_param *pm)
 {
 	printf("Key event %3d\n", keycode);
 	if (keycode == 53)
@@ -23,7 +23,7 @@ int	ft_keycode_functions_index(int keycode, t_p *pm)
 	return (0);
 }
 
-int		key_hook_press(int	keycode, t_p *pm)
+int		key_hook_press(int	keycode, t_param *pm)
 {
 	if (keycode == 123)
 	{
@@ -56,7 +56,7 @@ int		key_hook_press(int	keycode, t_p *pm)
 	return (0);
 }
 
-int	ft_hud(t_p *pm)
+int	ft_hud(t_param *pm)
 {
 	int		x;
 	int		y;
@@ -80,9 +80,9 @@ int	ft_hud(t_p *pm)
 	return (0);
 }
 
-t_p	*ft_pm_init(t_p *pm)
+t_param	*ft_pm_init(t_param *pm)
 {
-	pm = (t_p*)malloc(sizeof(t_p) * 1);
+	pm = (t_param*)malloc(sizeof(t_param) * 1);
 	pm->mlx = mlx_init();
 	pm->win = mlx_new_window(pm->mlx, WIN_W, WIN_H, WIN_N);
 	pm->ima = mlx_new_image(pm->mlx, WIN_W, WIN_H);
@@ -97,14 +97,16 @@ t_p	*ft_pm_init(t_p *pm)
 
 int	main()
 {
-	t_p	*pm;
+	t_param	*pm;
 
 	pm = ft_pm_init(pm);
 	pm->ima_data = mlx_get_data_addr(pm->ima, &(pm->ima->bpx), &(pm->ima->szl), &(pm->ima->end));
+	get_next_line(, &pm->ima_data);
+	printf("image data = %s\n", pm->ima_data);
 //	mlx_put_image_to_window(pm->mlx, pm->win, pm->ima, 0, 0);
 	mlx_key_hook(pm->win, ft_keycode_functions_index, pm);
 	mlx_hook(pm->win, 2, (1L << 0), key_hook_press, pm);
 	mlx_hook(pm->win, 17, (1L << 17), &ft_exit, pm);
 	mlx_loop(pm->mlx);
-	return(0);
+	return (0);
 }

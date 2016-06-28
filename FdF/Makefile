@@ -1,7 +1,9 @@
 EXENAME=fdf
 CMPNAME=gcc
 CMPFLAG=-Wall -Werror -Wextra
-MLXFLAG=-lmlx -framework OpenGL -framework Appkit
+MLXFLAG=-L Libft/ -lft \
+		-lmlx -framework OpenGL -framework Appkit
+INCLUDE=-I Libft/
 SRCNAME=main.c
 OBJNAME=$(SRCNAME:.c=.o)
 
