@@ -4,10 +4,13 @@ CMPFLAG=-Wall -Werror -Wextra
 MLXFLAG=-L Libft/ -lft \
 		-lmlx -framework OpenGL -framework Appkit
 INCLUDE=-I Libft/
-SRCNAME=main.c
+SRCNAME=main.c\
+		auxiliary_input_parsing.c\
+		auxiliary_calculations.c\
+		auxiliary_drawing.c\
+		auxiliary_interactions.c\
+		auxiliary_hooks.c
 OBJNAME=$(SRCNAME:.c=.o)
-
-
 
 all: $(EXENAME)
 

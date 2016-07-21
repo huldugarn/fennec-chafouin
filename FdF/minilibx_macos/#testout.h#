@@ -1,0 +1,39 @@
+typedef struct	lapin
+{
+  int		width;
+  int		height;
+  char		*buff;
+  float		rien[8];
+  struct lapin	*next;
+}		t_lapin
+
+pixel_img(img, x, y, 0x00ffffff)
+
+t_lapin *img = (t_lapin *)mlx_new_image(mlx, 1200, 800);
+
+inline void	pixel_img(t_lapin *img, int x, int y, int color)
+{
+	/* dereferencer  1 */
+	*(
+		/*gruger les flag de gcc 2 */
+		(int *)(unsigned long)
+		/* le buffer d'ecriture 3 */
+		(img->buff + (
+				/* position dans buffer */
+				((y * img->width) + x)
+				/* convertir les int en char */
+				* 4)
+		)
+	) = color;
+}
+
+
+int	iterative_fact(int nb)
+{
+	i = nb - 1;
+	while(i > 1)
+	{
+		nb = nb * i;
+	}
+	return(nb)
+}
