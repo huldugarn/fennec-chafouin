@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auxiliary_input_parsing.c                          :+:      :+:    :+:   */
+/*   fdf_2_auxiliary_input_parsing.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/21 11:55:40 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/07/21 16:19:48 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/08/04 15:57:56 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/08/04 15:58:14 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <fcntl.h>
+#include "fdf_0_header.h"
 
 t_p			**create_grid(t_e *e)
 {
@@ -21,7 +20,7 @@ t_p			**create_grid(t_e *e)
 	char	*buffer;
 
 	grid = (t_p **)malloc(sizeof(t_p *) * map_size(e->map_path));
-	if (!(fd = open(e->map_path, O_RDONLY)))
+	if (!(file_descriptor = open(e->map_path, O_RDONLY)))
 		exit(0);
 	y = 0;
 	e->gs_x = 0;
@@ -53,7 +52,7 @@ t_p			*create_y_points_list(t_e *e, char *buffer, int y)
 	x = -1;
 	while (split_result[++x] != NULL)
 	{
-		//	controler la valeur maximum de z
+	//	controler la valeur maximum de z
 		y_points_list[x] = create_point(x, y, ft_atoi(split_result[x]));
 		free(split_result[x]);
 	}
@@ -63,9 +62,9 @@ t_p			*create_y_points_list(t_e *e, char *buffer, int y)
 	return (y_points_list);
 }
 
-t_point		create_point(int x, int y, int z)
+t_p			create_point(int x, int y, int z)
 {
-	t_point	point;
+	t_p		point;
 
 	point.x = x;
 	point.y = y;
@@ -73,7 +72,7 @@ t_point		create_point(int x, int y, int z)
 	return (point);
 }
 
-int			map_size(char	*map_path)
+int			map_size(char *map_path)
 {
 	int		file_descriptor;
 	char	*buffer;
@@ -95,7 +94,7 @@ int			map_size(char	*map_path)
 	return (size);
 }
 
-int			tab_size(t_point **tab)
+int			tab_size(t_p **tab)
 {
 	int		i;
 

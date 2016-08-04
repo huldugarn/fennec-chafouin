@@ -4,12 +4,12 @@ CMPFLAG=-Wall -Werror -Wextra
 MLXFLAG=-L Libft/ -lft \
 		-lmlx -framework OpenGL -framework Appkit
 INCLUDE=-I Libft/
-SRCNAME=main.c\
-		auxiliary_input_parsing.c\
-		auxiliary_calculations.c\
-		auxiliary_drawing.c\
-		auxiliary_interactions.c\
-		auxiliary_hooks.c
+SRCNAME=fdf_1_main.c\
+		fdf_2_auxiliary_input_parsing.c\
+		fdf_3_auxiliary_mlx_hooks.c\
+		fdf_4_auxiliary_interactions.c\
+		fdf_5_auxiliary_calculations.c\
+		fdf_6_auxiliary_drawing.c
 OBJNAME=$(SRCNAME:.c=.o)
 
 all: $(EXENAME)
@@ -20,7 +20,7 @@ linkage: objectify
 	$(CMPNAME) -o $(EXENAME) $(OBJNAME) $(CMPFLAG) $(MLXFLAG)
 
 objectify:
-	$(CMPNAME) -c $(SRCNAME) fdf.h
+	$(CMPNAME) -c $(SRCNAME) fdf_0_header.h
 
 clean:
 	rm -f $(OBJNAME)

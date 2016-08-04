@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auxiliary_drawing.c                                :+:      :+:    :+:   */
+/*   fdf_6_auxiliary_drawing.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/21 12:00:07 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/07/21 15:58:47 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/08/04 16:02:53 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/08/04 16:03:16 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_0_header.h"
 
 void	draw_full(t_e *e)
 {
@@ -35,7 +35,7 @@ void	draw_full(t_e *e)
 
 void	draw_line(t_e *e, t_p *a, t_p *b)
 {
-	t_b	bsh;
+	t_b	*bsh;
 	t_p	p;
 	int	delta_error;
 
@@ -45,7 +45,7 @@ void	draw_line(t_e *e, t_p *a, t_p *b)
 	while (1)
 	{
 		if (display_inclusion(e, p.x, 'x') && display_inclusion(e, p.y, 'y'))
-			draw_pixel(e, translate(e, p.x, 'x'), translate(e, p.y, 'y'),
+			draw_pixl(e, translate(e, p.x, 'x'), translate(e, p.y, 'y'),
 					a->color);
 		if (p.x == b->x_p && p.y == b->y_p)
 			break;
@@ -65,16 +65,15 @@ void	draw_line(t_e *e, t_p *a, t_p *b)
 
 void	draw_pixl(t_e *e, int x, int y, int color)
 {
-	ft_memcpy(	&e->ima_data[(x * 4) + (y * e->ima_line)],
-				&(color),
-				(size_t)(sizeof(int)));
+	ft_memcpy(&e->ima_data[(x * 4) + (y * e->ima_line)], &(color),
+			(size_t)(sizeof(int)));
 }
 
-t_b		bresenham_init(t_p *a, t_p *b, int z_max)
+t_b		*bresenham_init(t_p *a, t_p *b, int z_max)
 {
-	t_b	*bsh
+	t_b	*bsh;
 
-	bsh = (t_b)malloc(sizeof(t_b));
+	bsh = (t_b *)malloc(sizeof(t_b));
 	bsh->delta_x = ft_absolu(b->x_p - a->x_p);
 	bsh->delta_y = ft_absolu(b->y_p - a->y_p);
 	bsh->delta_error = (bsh->delta_x > bsh->delta_y ?
@@ -96,6 +95,5 @@ int		color_selection(int a_z, int b_z, int z_max)
 		return(MRN);
 	else if (z_med < 0)
 		return(BLU);
-	else
-		return(GRN);
+	return(GRN);
 }
