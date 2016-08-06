@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:59:38 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/04 16:54:50 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/06 13:11:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	hook_expose_reset(t_e *e)
 
 int		hook_keys(t_e *e, int key)
 {
+	if (key == KB_ESC)
+	{
+		mlx_destroy_image(e->mlx, e->ima);
+		mlx_destroy_window(e->mlx, e->win);
+		exit(0);
+	}
 	if (key == NP_5 || key == NP_0 || key == PG_U || key == PG_D)
 		(key == NP_5 || key == PG_U) ? zoom(e, IN___) : zoom(e, OUT__);
 	if (key == NP_8 || key == AR_U)

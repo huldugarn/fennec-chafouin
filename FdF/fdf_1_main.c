@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:55:48 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/04 16:21:59 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/06 13:04:10 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	map_processing(t_e *e)
 	e->grid = create_grid(e);
 	reset(e);
 	ft_putstr("main_1 OK\n");
-	mlx_expose_hook(e->win, hook_expose, e);
 	mlx_key_hook(e->win, hook_keys, e);
 	mlx_mouse_hook(e->win, hook_mouse, e);
+	mlx_expose_hook(e->win, hook_expose, e);
 	mlx_loop(e->mlx);
 }

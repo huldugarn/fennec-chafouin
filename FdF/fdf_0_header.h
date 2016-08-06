@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:54:35 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/04 16:54:15 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/06 12:56:07 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <math.h>
 
 # define WIN_N "Liesse, Langueur & Nonchalance"
-# define WIN_W 1600
-# define WIN_H 900
+# define WIN_W 800
+# define WIN_H 600
 # define TILE_W 64
 # define TILE_H 64
 
