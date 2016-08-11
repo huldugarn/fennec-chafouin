@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 16:02:08 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/06 13:01:08 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/11 16:51:31 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void		calculation_point(t_e *e, t_p *p)
 	float	s_x;
 	float	s_y;
 
-	display_x = p->x * e->gap_surface;
-	display_y = p->y * e->gap_surface;
-	display_z = p->z * e->gap_volume;
+	display_x = (p->x - (e->gs_x / 2)) * e->gap_surface;
+	display_y = (p->y - (e->gs_y / 2)) * e->gap_surface;
+	display_z = p->z * ((float)e->gap_volume / 5) * e->gap_surface;
 	s_x = display_x * cos(e->angle) - display_y * sin(e->angle);
 	s_y = display_x * sin(e->angle) + display_y * cos(e->angle);
 	p->x_p = s_x - s_y + WIN_W * 0.3;

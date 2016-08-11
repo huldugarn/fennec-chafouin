@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 16:02:53 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/04 16:03:16 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/11 16:27:10 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_line(t_e *e, t_p *a, t_p *b)
 	t_p	p;
 	int	delta_error;
 
-	bsh = bresenham_init(a, b, e->z_max);
+	bsh = bresenham_init(a, b, e->z_max, e->gap_volume);
 	p.x = a->x_p;
 	p.y = a->y_p;
 	while (1)
@@ -69,7 +69,7 @@ void	draw_pixl(t_e *e, int x, int y, int color)
 			(size_t)(sizeof(int)));
 }
 
-t_b		*bresenham_init(t_p *a, t_p *b, int z_max)
+t_b		*bresenham_init(t_p *a, t_p *b, int z_max, int volume)
 {
 	t_b	*bsh;
 
@@ -80,11 +80,11 @@ t_b		*bresenham_init(t_p *a, t_p *b, int z_max)
 			bsh->delta_x : -(bsh->delta_y)) / 2;
 	bsh->sign_x = a->x_p < b->x_p ? 1 : -1;
 	bsh->sign_y = a->y_p < b->y_p ? 1 : -1;
-	a->color = color_selection(a->z, b->z, z_max);
+	a->color = color_selection(a->z, b->z, z_max, volume);
 	return(bsh);
 }
 
-int		color_selection(int a_z, int b_z, int z_max)
+int		color_selection(int a_z, int b_z, int z_max, int volume)
 {
 	int	z_med;
 

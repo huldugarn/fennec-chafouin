@@ -82,7 +82,7 @@ int	ft_hud(t_param *pm)
 
 t_param	*ft_pm_init(t_param *pm, char *mp)
 {
-	pm = (t_param*)malloc(sizeof(t_param) * 1);
+	pm  (t_param*)malloc(sizeof(t_param) * 1);
 	pm->mlx = mlx_init();
 	pm->win = mlx_new_window(pm->mlx, WIN_W, WIN_H, WIN_N);
 	pm->map_path = mp;

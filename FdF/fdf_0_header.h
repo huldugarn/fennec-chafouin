@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:54:35 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/06 12:56:07 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/11 16:23:02 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <math.h>
 
 # define WIN_N "Liesse, Langueur & Nonchalance"
-# define WIN_W 800
-# define WIN_H 600
+# define WIN_W 1600
+# define WIN_H 900
 # define TILE_W 64
 # define TILE_H 64
 
@@ -128,6 +128,7 @@ typedef struct		s_point
 	int				y;
 	int				y_p;	//	y prime
 	int				z;
+	int				z_c;	//	current z value
 	int				color;
 }					t_p;
 
@@ -156,7 +157,7 @@ typedef struct		s_envelope
 	int				z_max;		//	max value z axis
 	int				gap_surface;//	écart des points en surface
 	int				gap_volume;	//	écart des points en volume
-	int				angle;
+	float			angle;
 	int				x_translate;
 	int				y_translate;
 }					t_e;
@@ -166,6 +167,7 @@ typedef struct		s_envelope
 */
 int					main(int argc, char **argv);
 void				map_processing(t_e *e);
+int					end_exe(t_e *e);
 
 /*
 **	2 - Auxiliary - Input parsing
@@ -179,10 +181,11 @@ int					tab_size(t_p **tab);
 /*
 **	3 - Auxiliary - Hooks
 */
-int					hook_expose(t_e *e);
-void				hook_expose_reset(t_e *e);
-int					hook_keys(t_e *e, int key);
-int					hook_mouse(t_e *e, int button, int x, int y);
+int					expose_hook(t_e *e);
+void				expose_hook_reset(t_e *e);
+int					key_hook(int keycode, t_e *e);
+int					key_hook_press(int keycode, t_e *e);
+int					mouse_hook(int button, int x, int y, t_e *e);
 
 /*
 **	4 - Auxiliary - Interactions
@@ -207,7 +210,7 @@ int					translate(t_e *e, int n, char c);
 void				draw_full(t_e *e);
 void				draw_line(t_e *e, t_p *a, t_p *b);
 void				draw_pixl(t_e *e, int x, int y, int color);
-t_b					*bresenham_init(t_p *a, t_p *b, int z_max);
-int					color_selection(int a_z, int b_z, int z_max);
+t_b					*bresenham_init(t_p *a, t_p *b, int z_max, int volume);
+int					color_selection(int a_z, int b_z, int z_max, int volume);
 
 #endif

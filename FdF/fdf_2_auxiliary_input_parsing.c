@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:57:56 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/06 16:48:19 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/11 17:30:59 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_p			**create_grid(t_e *e)
 		free(buffer);
 		++y;
 	}
-	grid[y] = create_y_points_list(e, buffer, y);
-	free(buffer);
+//	grid[y] = create_y_points_list(e, buffer, y);
+//	free(buffer);
 	close(file_descriptor);
 	e->gs_y = tab_size(grid);
 	return (grid);
@@ -73,6 +73,7 @@ t_p			create_point(int x, int y, int z)
 	point.x = x;
 	point.y = y;
 	point.z = z;
+	point.z_c = z;
 	return (point);
 }
 
