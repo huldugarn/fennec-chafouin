@@ -12,15 +12,16 @@
 
 #include "libft.h"
 
+/*
+**	nombre de bits : (attention, power doit gerer le resultat en long)
+**	while (ft_power(2, i++) < n);
+*/
+
 char		**ft_unicode(unsigned int n)
 {
 	char	*b;
 	int		l;
-/*
- *	nombre de bits : (attention, power doit gerer le resultat en long)
- *	while (ft_power(2, i++) < n);
- *	
-*/
+
 	b = ft_btoa(ft_itob(n));
 	l = ft_strlen(b);
 	if (l < 12)

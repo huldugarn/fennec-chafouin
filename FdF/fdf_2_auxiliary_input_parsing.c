@@ -30,8 +30,6 @@ t_p			**create_grid(t_e *e)
 		free(buffer);
 		++y;
 	}
-//	grid[y] = create_y_points_list(e, buffer, y);
-//	free(buffer);
 	close(file_descriptor);
 	e->gs_y = tab_size(grid);
 	return (grid);
@@ -45,7 +43,6 @@ t_p			*create_y_points_list(t_e *e, char *buffer, int y)
 	int		x;
 	int		z;
 
-	//	controler la validité de la chaine de caractères
 	split_result = ft_strsplit(buffer, ' ');
 	split_amount = tab_size((t_p **)split_result);
 	e->gs_x = (split_amount > e->gs_x) ? (split_amount) : (e->gs_x);

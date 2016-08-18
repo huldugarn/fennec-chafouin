@@ -47,5 +47,5 @@ int		end_exe(t_e *e)
 	mlx_destroy_window(e->mlx, e->win);
 	ft_putendl("So long, and thanks for all the fish");
 	exit(0);
-	return(0);
+	return (0);
 }

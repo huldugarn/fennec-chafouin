@@ -45,10 +45,9 @@ void	draw_line(t_e *e, t_p *a, t_p *b)
 	while (1)
 	{
 		if (display_inclusion(e, p.x, 'x') && display_inclusion(e, p.y, 'y'))
-			draw_pixl(e, translate(e, p.x, 'x'), translate(e, p.y, 'y'),
-					a->color);
+			draw_pixl(e, translate(e, p.x, 'x'), translate(e, p.y, 'y'), a->c);
 		if (p.x == b->x_p && p.y == b->y_p)
-			break;
+			break ;
 		if ((delta_error = bsh->delta_error) > -(bsh->delta_x))
 		{
 			bsh->delta_error -= bsh->delta_y;
@@ -80,8 +79,8 @@ t_b		*bresenham_init(t_p *a, t_p *b, int z_max, int volume)
 			bsh->delta_x : -(bsh->delta_y)) / 2;
 	bsh->sign_x = a->x_p < b->x_p ? 1 : -1;
 	bsh->sign_y = a->y_p < b->y_p ? 1 : -1;
-	a->color = color_selection(a->z, b->z, z_max, volume);
-	return(bsh);
+	a->c = color_selection(a->z, b->z, z_max, volume);
+	return (bsh);
 }
 
 int		color_selection(int a_z, int b_z, int z_max, int volume)
@@ -90,10 +89,10 @@ int		color_selection(int a_z, int b_z, int z_max, int volume)
 
 	z_med = (a_z + b_z) / 2;
 	if (z_med > z_max * 0.8)
-		return(WHT);
+		return (WHT);
 	else if (z_med == 0)
-		return(MRN);
+		return (MRN);
 	else if (z_med < 0)
-		return(BLU);
-	return(GRN);
+		return (BLU);
+	return (GRN);
 }

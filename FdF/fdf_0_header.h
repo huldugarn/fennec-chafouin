@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 15:54:35 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/08/11 16:23:02 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/16 15:38:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@
 typedef struct		s_point
 {
 	int				x;
-	int				x_p;	//	x prime
+	int				x_p;
 	int				y;
-	int				y_p;	//	y prime
+	int				y_p;
 	int				z;
-	int				z_c;	//	current z value
-	int				color;
+	int				z_c;
+	int				c;
 }					t_p;
 
 typedef struct		s_bresenham
@@ -144,19 +144,19 @@ typedef struct		s_bresenham
 typedef struct		s_envelope
 {
 	char			*map_path;
-	void			*mlx;		//	pointeur vers adresse de référence Xlib/exe
-	void			*win;		//	pointeur vers adresse de la fenetre
+	void			*mlx;
+	void			*win;
 	void			*ima;
-	char			*ima_data;	//	image data
-	int				ima_bits;	//	image bits per pixel
-	int				ima_line;	//	image line size
-	int				ima_endi;	//	image endian
+	char			*ima_data;
+	int				ima_bits;
+	int				ima_line;
+	int				ima_endi;
 	t_p				**grid;
-	int				gs_x;		//	grid size x axis
-	int				gs_y;		//	grid size y axis
-	int				z_max;		//	max value z axis
-	int				gap_surface;//	écart des points en surface
-	int				gap_volume;	//	écart des points en volume
+	int				gs_x;
+	int				gs_y;
+	int				z_max;
+	int				gap_surface;
+	int				gap_volume;
 	float			angle;
 	int				x_translate;
 	int				y_translate;

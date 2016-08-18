@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_absolu(int n)
+int			ft_absolu(int n)
 {
 	return ((n < 0) ? -n : n);
 }
@@ -34,9 +34,9 @@ long		ft_power(int n, int e)
 	return (r);
 }
 
-int		ft_squareroot(int a)
+int			ft_squareroot(int a)
 {
-	int x;
+	int		x;
 
 	x = 1;
 	if (a == 4)

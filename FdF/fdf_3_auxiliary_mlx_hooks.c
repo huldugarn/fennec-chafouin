@@ -16,7 +16,6 @@ int		expose_hook(t_e *e)
 {
 	calculation_full(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->ima, 0, 0);
-//	fonction pour afficher des infos à l'écran
 	return (0);
 }
 
@@ -55,7 +54,7 @@ int		key_hook_press(int keycode, t_e *e)
 		rotation(e, RIGHT);
 	if (keycode == NP_PLUS || keycode == NP_MINUS)
 		keycode == NP_PLUS ? extrusion(e, MORE_) : extrusion(e, LESS_);
-	return(0);	
+	return (0);
 }
 
 int		mouse_hook(int button, int x, int y, t_e *e)

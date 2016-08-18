@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:53:59 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/17 14:20:42 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/16 17:15:31 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_printf(const char * restrict format, ...)
 			o_disp(opt, 1, 0);
 			printf("i = [%i], L = [%i]\n", i, L);
 			i = i + L;
-			printf("format[i] = %c, nata = [%i]\n", format[i], opt.nata);
+			printf("format[i] = %c, nata = [%i]\n", format[i], opt->nata);
 			rv = rv + c_hub(format, i, opt, vl);
 			pfps("\n=== CONVERSION - END   ===\n", 1, 0);
 		}

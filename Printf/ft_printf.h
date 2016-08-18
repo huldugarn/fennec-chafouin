@@ -6,7 +6,7 @@
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 12:55:58 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/05/17 14:20:38 by rle-corr         ###   ########.fr       */
+/*   Updated: 2016/08/16 17:20:15 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 /*
 **							| Structures
 */
+
 typedef struct		s_opt
 {
 	int				nata;	//	next argument to access
