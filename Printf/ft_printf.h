@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <wchar.h>
+# include "../Libft/libft.h"
+
 /*
 **							| Structures
 */
@@ -43,18 +45,21 @@ typedef struct		s_arg
 }					t_arg;
 
 /*
-**	ft_printf.c				| Core function
+**	main.c					| Core function
 */
-void				va_end(va_list vl);
-//	void				va_start(va_list vl, last);
-//	type				va_arg(va_list vl, type);
 int					ft_printf(const char * restrict format, ...);
-
+void				ft_pf_exit(char *message);
+t_list				*ft_pf_splist(char *s);
+void				ft_put_elem(t_list *elem);
+char				*ft_pf_concatenate(t_list *f_list);
+int					ft_pf_write(char *string);
+t_list				*ft_pf_format(t_list *s_format, va_list vl);
 /*
 **	ft_printf_options1.c	| Options management
 */
 t_opt				*o_init(t_opt *opt);
-int					o_attr(const char * restrict format, int i, t_opt *opt);
+//int					o_attr(const char * restrict format, int i, t_opt *opt);
+int					o_attr(char *segment, t_opt *opt);
 void				o_disp(t_opt *opt, int fd, int tc);
 
 /*
@@ -70,7 +75,8 @@ int					o_lmod(char *c);
 **	ft_printf_conversions1.c| Conversions
 */
 char				c_type(char *c);
-int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
+//int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
+char				*c_hub(char *s, t_opt *o, va_list vl);
 
 /*
 **	ft_printf_conversions2.c| Characters & Strings Conversions

@@ -34,7 +34,7 @@ t_opt	*o_init(t_opt *opt)
 	opt->ctyp = '\0';
 	return (opt);
 }
-
+/* OLD
 //	Attribuer aux options leurs valeurs
 //	Retourne la taille totale des options
 int			o_attr(const char * restrict format, int i, t_opt *opt)
@@ -62,7 +62,37 @@ int			o_attr(const char * restrict format, int i, t_opt *opt)
 //	printf("\n	Taille totale des options : [%i]", L);
 	printf("=== ATTRIBUTION - OK ===\n");
 	return (L);
-}
+}*/
+
+//	Attribuer aux options leurs valeurs
+//	Retourne la taille totale des options
+int			o_attr(char *segment, t_opt *opt)
+{
+	int		i;
+	int		l;// taille de l'option
+	int		L;// taille des options
+
+	i = 0;
+	opt = o_init(opt);
+	if ((l = o_nata(&((char *)segment)[i])) > 0)
+		opt->nata = ft_atoi(ft_strsub(segment, i, l));
+	L = l + o_flag(&((char *)segment)[i + l], opt, 0);
+	if ((l = o_mfwd(&((char *)segment)[i + L])) > 0)
+		opt->mfwd = ft_atoi(ft_strsub(segment, (i + L), l));
+	L = L + l;
+	if ((l = o_prec(&((char *) segment)[i + L])) > 0)
+		opt->prec = ft_atoi(ft_strsub(segment, (i + L + 1), (l - 1)));
+	L = L + l;
+	if ((l = o_lmod(&((char *) segment)[i + L])) > 0)
+		opt->lmod = l;
+//	printf("\n	Taille de l'option LMOD : [%i]", l);
+	if (l != 0)
+		(l > 20) ? (L = L + 2) : (L = L + 1);
+	opt->ctyp = *ft_strsub(segment, (i + L), 1);
+//	o_disp(opt, 1, 0);//	DISPLAY
+//	printf("\n	Taille totale des options : [%i]", L);
+	printf("=== ATTRIBUTION - OK ===\n");
+	return (L);
 
 //	Display structure
 void	o_disp(t_opt *opt, int fd, int tc)

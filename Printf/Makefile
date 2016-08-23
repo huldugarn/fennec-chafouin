@@ -21,7 +21,7 @@ LIB_NAME = -lft
 LIB_FLAG = $(LIB_PATH) $(LIB_NAME)
 SRC_PATH = .
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = ft_printf.c \
+SRC_NAME = main.c \
 		   ft_printf_conversions1.c \
 		   ft_printf_conversions2.c \
 		   ft_printf_conversions3.c \
