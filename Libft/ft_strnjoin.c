@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	ft_strnjoin
+**	Append [len] characters of string [s2] to string [s1] in a newly allocated
+**	[s_join] string.
+*/
+
 char	*ft_strnjoin(char const *s1, char const *s2, size_t len)
 {
 	int		n;

@@ -20,3 +20,9 @@ void	ft_strclr(char *s)
 	while (s[i] != '\0')
 		s[i++] = '\0';
 }
+
+void	ft_strfill(char *s, char c)
+{
+	while (*s)
+		*s++ = c;
+}

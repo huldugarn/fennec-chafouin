@@ -70,6 +70,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
+void				ft_strfill(char *s, char c);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 
@@ -140,5 +141,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstpushback(t_list **list, t_list *new);
+void				ft_lstpushback_voidreturn(t_list **alst, t_list *new);
 
 #endif

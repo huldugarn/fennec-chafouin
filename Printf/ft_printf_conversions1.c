@@ -25,41 +25,128 @@ char		c_type(char *c)
 		return (*c);
 }
 
-/* OLD int			c_hub(const char * restrict f, int i, t_opt *o, va_list vl)
+char		*c_hub(char *s, va_list vl)
 {
-	int		rv;
-	
-	rv = 0;
-	printf("=== CONVERSION - START ===\n");
-	if (f[i] == '%')
-		rv = pfpc('%', 1, 0);
-	if (f[i] == 'c' || f[i] == 'C')
-		rv = (f[i] == 'c') ? (c_char(vl, o, 0)) : (c_char(vl, o, 1));
-	if (f[i] == 'i' || f[i + 1] == 'd')
-		rv = pfpn(va_arg(vl, int), 1, 0);
-	if (f[i] == 's' || f[i] == 'S')
-	{
-		printf("o->lmod = %i", o->lmod);
-		rv = (o->lmod == 3) ? (c_str_s(vl, o, 0)) : (c_str_s(vl, o, 0));
-	}
-	return (rv);
-}*/
+	char	*r;
+	t_opt	*o;
 
-char		*c_hub(char *s, t_opt *o, va_list vl)
-{
+	if (!s)
+		ft_pf_exit("ft_printf failed: conversion related error");
+	r = "\0";
+	o = o_attr(s, &o);
+//	o_disp(o, 1, 0);//	DISPLAY
 	if (o->ctyp == '%')
-		c_percent(s, o, vl);
-	else if (o->ctyp == 'n' || o->ctyp == 'p')
-		(o->ctyp == 'n') ? (c_n(vl, o, 0)) : (c_p(vl, o, 1));
-	else if (s[i] == 'c' || f[i] == 'C')
-		(o->ctyp == 'c') ? (c_c(vl, o, 0)) : (c_C(vl, o, 1));
-	else if (s[i] == 's' || f[i] == 'S')
-		(o->ctyp == 's') ? (c_s(vl, o, 0)) : (c_S(vl, o, 1));
-	else
-		c_numeric(vl, xxxx);
+		r = c_percent(o, 1);
+	else if (o->ctyp == 'c')
+		r = c_c(o, vl);
+//		(o.lmod == 3) ? (r = c_C(s, o, vl)) : (r = c_c(s, o, vl));
+	else if (o->ctyp == 's')
+		r = c_s(o, vl);
+//		(o.lmod == 3) ? (r = c_S(s, o, vl)) : (r = c_s(s, o, vl));
+	else if (o->ctyp == 'd' || o->ctyp == 'i')
+		r = c_d(o, vl);
+
+//	else if (o.ctyp == 'n' || o.ctyp == 'p')
+//		(o.ctyp == 'n') ? (r = c_n(s, o, vl)) : (r = c_p(s, o, vl));
+
+//	else if (o.ctyp == 'C')
+//		r = c_C(s, o, vl);
+
+//	else if (o.ctyp == 'S')
+//		r = c_S(s, o, vl);
+//	else
+//		r = c_numeric(s, o, vl);
+//	free(vl); //supp
+//	free(&o);
+//	ft_putendl("conversion hub ended"); // debug
+	return (r);
 }
 
-char		*c_percent(char	*s, t_opt **o, va_list vl)
+char		*c_percent(t_opt *o, int l)
 {
-	
+	char	*r;
+
+	r = "\%\0";
+	if (o->mfwd > 1)
+		r = f_padd(r, o, l);
+	return (r);
+}
+
+char		*c_c(t_opt *o, va_list vl)
+{
+	char	*r;
+	char	c;
+
+	r = ft_strnew(1);
+	c = va_arg(vl, int);
+	r[0] = c;
+	if (o->mfwd > 1)
+		r = f_padd(r, o, 1);
+	return (r);
+}
+
+char		*c_s(t_opt *o, va_list vl)
+{
+	char	*r;
+	int		l;
+
+	r = va_arg(vl, char*);
+	l = ft_strlen(r);
+	if (o->mfwd > l)
+		r = f_padd(r, o, l);
+	return (r);
+}
+
+char		*c_d(t_opt *o, va_list vl)
+{
+	char	*r;
+	size_t	d;
+	int		l;
+
+//	if (o->lmod == 1 || o->lmod == 2)
+//		(o->lmod == 1) ? (d = va_arg(vl, char)) : (d = va_arg(vl, short));
+//	else if (o->lmod == 3 || o->lmod == 4)
+//		(o->lmod == 3) ? (d = va_arg(vl, long)) : (d = va_arg(vl, long long));
+//	else if (o->mod == 5 || o->lmod == 6)
+//		o->lmod == 5 ? d = va_arg(vl, intmax_t) : d = va_arg(vl, ptrdiff_t);
+//	else if (o->mod == 8 || o->lmod == 9)
+//		o->lmod == 5 ? d = va_arg(vl, quad_t) : d = va_arg(vl, long double);
+//	else
+		d = va_arg(vl, int);
+	r = ft_itoa(d);
+	r = f_prec(r, o, ft_strlen(r));
+	l = ft_strlen(r);
+	if (o->mfwd > l)
+		r = f_padd(r, o, l);
+	return (r);
+}
+
+char	*f_prec(char *s, t_opt *o, int l)
+{
+	char	*r;
+	int		i;
+
+	r = ft_strnew(o->prec);
+	i = 0;
+	while (i < o->prec)
+		r[i++] = '0';
+	return (r = ft_strjoin(ft_strndup(r, o->prec - l), s));
+}
+
+char	*f_padd(char *s, t_opt *o, int l)
+{
+	char	*r;
+	char	filler;
+	int		i;
+
+	i = 0;
+	r = ft_strnew(o->mfwd);
+	filler = ' ';
+	if (o->bpad == 0 && o->zpad == 1)
+		filler = '0';
+	while (i < o->mfwd)
+		r[i++] = filler;
+	if (o->bpad)
+		return (r = ft_strnjoin(s, r, o->mfwd - l));
+	return (r = ft_strjoin(ft_strndup(r, o->mfwd - l), s));
 }
