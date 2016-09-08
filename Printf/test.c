@@ -3,15 +3,16 @@
 #include <wchar.h>
 #include "ft_printf.h"
 
-#define FORMAT "DEBUT >| %9s + %-14.17d |< FIN\n"
+#define FORMAT "DEBUT >| %s + %x = %s |< FIN"
 #define ARG1 "joie"
-#define ARG2 123456789
-#define ARG3 "fantaisie"
+#define ARG2 2564
+#define ARG3 "test"
 
-// clear && echo \*\*\* && gcc -Wall -Werror -Wextra -I. -L ../Libft -lft ft_printf.h main.c test.c aux1_split_format.c ft_printf_conversions1.c ft_printf_options1.c ft_printf_options2.c ft_printf_displays1.c
-
+// clear && echo \*\*\* && gcc -Wall -Werror -Wextra -I. -L ../Libft -lft ft_printf.h main.c test.c aux1_split_format.c ft_printf_conversions1.c ft_printf_options1.c ft_printf_options2.c ft_printf_displays1.c ft_printf_displays2.c && ./a.out
 int			main()
 {
+	int	a = 0;
+	int b = 0;
 //	wint_t	wc;
 //	wchar_t	*ws;
 
@@ -28,15 +29,17 @@ int			main()
 //	ft_lstiter(list, ft_put_elem);
 //	ft_putendl(ft_pf_concatenate(list));
 
-	ft_printf(	FORMAT\
-				, ARG1\
-				, ARG2\
-			//	, ARG3\//
+	a = ft_printf(	FORMAT\
+					, ARG1\
+					, ARG2\
+					, ARG3\
 				);
-	printf(		FORMAT\
-				, ARG1\
-				, ARG2\
-			//	, ARG3\//
+	printf("	Total:%i\n", a);
+	b = printf(		FORMAT\
+					, ARG1\
+					, ARG2\
+					, ARG3\
 				);
+	printf("	Total:%i\n", b);
 	return (0);
 }

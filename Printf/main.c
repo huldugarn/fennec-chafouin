@@ -14,7 +14,7 @@
 #include "../Libft/libft.h"	//	adjust
 #include <stdio.h>			//	delete
 #include <locale.h>
-#define CTYP "\%aAcCdDeEfFgGnoOpsSuUxX" // check
+#define CTYP "\%aAcCdDeEfFgGinoOpsSuUxX" // check
 /*
 
 	convertir et rendre un char *

@@ -40,12 +40,17 @@ char		*c_hub(char *s, va_list vl)
 	else if (o->ctyp == 'c')
 		r = c_c(o, vl);
 //		(o.lmod == 3) ? (r = c_C(s, o, vl)) : (r = c_c(s, o, vl));
+	else if (o->ctyp == 'C')
+		r = c_C(o, vl);
 	else if (o->ctyp == 's')
 		r = c_s(o, vl);
+	else if (o->ctyp == 'S')
+		r = c_S(o, vl);
 //		(o.lmod == 3) ? (r = c_S(s, o, vl)) : (r = c_s(s, o, vl));
-	else if (o->ctyp == 'd' || o->ctyp == 'i')
-		r = c_d(o, vl);
-
+	else if (o->ctyp == 'd' || o->ctyp == 'D' || o->ctyp == 'i')
+		r = c_di(o, vl);
+	else if (o->ctyp == 'o' || o->ctyp == 'u' || o->ctyp == 'x')
+		r = c_oux(o, vl);
 //	else if (o.ctyp == 'n' || o.ctyp == 'p')
 //		(o.ctyp == 'n') ? (r = c_n(s, o, vl)) : (r = c_p(s, o, vl));
 
@@ -61,7 +66,23 @@ char		*c_hub(char *s, va_list vl)
 //	ft_putendl("conversion hub ended"); // debug
 	return (r);
 }
-
+/*
+void		lmod_l(void **arg, t_opt *o, va_list vl)
+{
+	if (o->ctyp == 'c' || o->ctyp == 'C')
+		(wint_t)arg = va_arg(vl, wint_t);
+	if (o->ctyp == 's' || o->ctyp == 'S')
+		(wchar_t*)arg = va_arg(vl, wchar_t*);
+	if (ft_strchr("dDi", (int)o->ctyp) != NULL)
+		(long)arg = va_arg(vl, long);
+	if (ft_strchr("oOuUxX", (int)o->ctyp) != NULL)
+		(unsigned long)arg = va_arg(vl, unsigned long);
+	if (ft_strchr("aAeEfFgG", (int)o->ctyp) != NULL)
+		(double)arg = va_arg(vl, double);
+	if (o->ctyp == 'n')
+		(long*)arg = va_arg(vl, long*);
+}
+*/
 char		*c_percent(t_opt *o, int l)
 {
 	char	*r;
@@ -75,11 +96,20 @@ char		*c_percent(t_opt *o, int l)
 char		*c_c(t_opt *o, va_list vl)
 {
 	char	*r;
-	char	c;
 
 	r = ft_strnew(1);
-	c = va_arg(vl, int);
-	r[0] = c;
+	r[0] = (char)va_arg(vl, int);
+	if (o->mfwd > 1)
+		r = f_padd(r, o, 1);
+	return (r);
+}
+
+char		*c_C(t_opt *o, va_list vl)
+{
+	char	*r;
+
+	r = ft_strnew(1);
+	r = unicheck(va_arg(vl, wchar_t));
 	if (o->mfwd > 1)
 		r = f_padd(r, o, 1);
 	return (r);
@@ -97,24 +127,77 @@ char		*c_s(t_opt *o, va_list vl)
 	return (r);
 }
 
-char		*c_d(t_opt *o, va_list vl)
+char		*c_S(t_opt *o, va_list vl)
 {
 	char	*r;
-	size_t	d;
+	wchar_t	*s;
 	int		l;
 
-//	if (o->lmod == 1 || o->lmod == 2)
-//		(o->lmod == 1) ? (d = va_arg(vl, char)) : (d = va_arg(vl, short));
-//	else if (o->lmod == 3 || o->lmod == 4)
-//		(o->lmod == 3) ? (d = va_arg(vl, long)) : (d = va_arg(vl, long long));
-//	else if (o->mod == 5 || o->lmod == 6)
-//		o->lmod == 5 ? d = va_arg(vl, intmax_t) : d = va_arg(vl, ptrdiff_t);
-//	else if (o->mod == 8 || o->lmod == 9)
-//		o->lmod == 5 ? d = va_arg(vl, quad_t) : d = va_arg(vl, long double);
-//	else
-		d = va_arg(vl, int);
-	r = ft_itoa(d);
-	r = f_prec(r, o, ft_strlen(r));
+	r = "\0";
+	s = va_arg(vl, wchar_t*);
+	while (*s)
+		r = ft_strjoin(r, unicheck(*(s++)));
+	l = ft_strlen(r);
+	if (o->mfwd > l)
+		r = f_padd(r, o, l);
+	return (r);
+}
+
+char				*c_di(t_opt *o, va_list vl)
+{
+	char			*r;
+	long long int	tmp;
+	int				l;
+
+	tmp = va_arg(vl, long long int);
+	if (o->lmod == 1 || o->lmod == 21)
+		(o->lmod == 21) ? (tmp = (char)tmp) : (tmp = (short)tmp);
+	else if (o->lmod == 2)
+		tmp = (intmax_t)tmp;
+	else if (o->lmod == 3 || o->lmod == 23 || o->ctyp == 'D')
+		(o->lmod == 23) ? (tmp = (long long)tmp) : (tmp = (long)tmp);
+	else if (o->lmod == 4)
+		tmp = (long double)tmp;
+	else
+		tmp = (int)tmp;
+	r = ft_llitoa(tmp);
+	if (tmp >= 0 && (o->asig || o->esig))
+		r = f_sign(r, o);
+	if (o->prec)	
+		r = f_prec(r, o, ft_strlen(r));
+	l = ft_strlen(r);
+	if (o->mfwd > l)
+		r = f_padd(r, o, l);
+	return (r);
+}
+
+char						*c_oux(t_opt *o, va_list vl)
+{
+	char					*r;
+	unsigned long long int	tmp;
+	int						l;
+	int						base;
+
+	if (o->ctyp == 'u')
+		base = 10;
+	else
+		(o->ctyp == 'o') ? (base = 2) : (base = 16);
+	tmp = va_arg(vl, unsigned long long int);
+	if (o->lmod == 1 || o->lmod == 21)
+		(o->lmod == 21) ? (tmp = (unsigned char)tmp) :
+		 (tmp = (unsigned short)tmp);
+	else if (o->lmod == 2)
+		tmp = (uintmax_t)tmp;
+	else if (o->lmod == 3 || o->lmod == 23 || o->ctyp == 'D')
+		(o->lmod == 23) ? (tmp = (unsigned long long)tmp) :
+		 (tmp = (unsigned long)tmp);
+	else
+		tmp = (unsigned int)tmp;
+	printf("base = %d\n", base);
+	r = ft_ullitoa_base(tmp, base);
+	ft_putendl(r);
+	if (o->prec)	
+		r = f_prec(r, o, ft_strlen(r));
 	l = ft_strlen(r);
 	if (o->mfwd > l)
 		r = f_padd(r, o, l);
@@ -149,4 +232,13 @@ char	*f_padd(char *s, t_opt *o, int l)
 	if (o->bpad)
 		return (r = ft_strnjoin(s, r, o->mfwd - l));
 	return (r = ft_strjoin(ft_strndup(r, o->mfwd - l), s));
+}
+
+char	*f_sign(char *s, t_opt *o)
+{
+	char	*r;
+
+	if (o->esig)
+		return (r = ft_strjoin("+\0", s));
+	return (r = ft_strjoin(" \0", s));
 }

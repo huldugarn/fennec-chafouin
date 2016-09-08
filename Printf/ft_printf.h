@@ -56,6 +56,7 @@ int					ft_pf_write(char *string);
 t_list				*ft_pf_formap(t_list *s_format, va_list vl);
 char				*f_padd(char *s, t_opt *o, int l);
 char				*f_prec(char *s, t_opt *o, int l);
+char				*f_sign(char *s, t_opt *o);
 char				**ft_pf_splist_tab(char *s);
 char				**ft_pf_formap_tab(char **s_format, va_list vl);
 char				*ft_pf_concatenate_tab(char **f_tab);
@@ -82,9 +83,13 @@ int					o_lmod(char *c);
 **	ft_printf_conversions1.c| Conversions
 */
 char				c_type(char *c);
+void		lmod_l(void **arg, t_opt *o, va_list vl);
 char		*c_c(t_opt *o, va_list vl);
+char		*c_C(t_opt *o, va_list vl);
 char		*c_s(t_opt *o, va_list vl);
-char		*c_d(t_opt *o, va_list vl);
+char		*c_S(t_opt *o, va_list vl);
+char		*c_di(t_opt *o, va_list vl);
+char		*c_oux(t_opt *o, va_list vl);
 //int					c_hub(const char * restrict f, int i, t_opt *o, va_list vl);
 char				*c_hub(char *s, va_list vl);
 char				*c_percent(t_opt *o, int l);
@@ -117,5 +122,11 @@ int					umm(int fd, wint_t wc);
 int					um2(int fd, char ca[4], wint_t wc);
 int					um3(int fd, char ca[4], wint_t wc);
 int					um4(int fd, char ca[4], wint_t wc);
+char 				*unicheck(wchar_t c);
+char 				*unimask1(wchar_t c);
+char 				*unimask2(wchar_t c);
+char 				*unimask3(wchar_t c);
+char 				*unimask4(wchar_t c);
+
 
 #endif

@@ -22,10 +22,7 @@ t_list	*ft_lstpushback(t_list **list, t_list *new)
 	else
 	{
 		while (cursor->next != NULL)
-		{
-		//	printf("%p < next3\n",cursor->next);
 			cursor = cursor->next;
-		}
 		cursor->next = new;
 	}
 	return (*list);

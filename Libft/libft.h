@@ -115,6 +115,10 @@ int					ft_squareroot(int a);
 int					ft_squareroot(int n);
 
 char				*ft_itoa(int n);
+char				*ft_itoa_base(int value, int base);
+char				*ft_llitoa(long long n);
+char				*ft_ullitoa(unsigned long long n);
+char				*ft_ullitoa_base(unsigned long long value, int base);
 
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
