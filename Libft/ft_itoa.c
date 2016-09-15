@@ -121,7 +121,6 @@ char					*ft_ullitoa_base(unsigned long long value, int base)
 	{
 		v /= base;
 		l == 0 ? l = 1 : ++l;
-		printf("%i\n", l);
 	}
 	if (!(s = (char*)malloc(sizeof(char) * l + 1)))
 		return (NULL);
@@ -129,7 +128,6 @@ char					*ft_ullitoa_base(unsigned long long value, int base)
 	c = "0123456789abcdef\0";
 	while (value != 0)
 	{
-		printf("s[%i] = %c, value = %llu\n", l, c[value % base], value);
 		s[l] = c[value % base];
 		value /= base;
 		--l;

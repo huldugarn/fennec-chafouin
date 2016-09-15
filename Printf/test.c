@@ -3,9 +3,9 @@
 #include <wchar.h>
 #include "ft_printf.h"
 
-#define FORMAT "DEBUT >| %s + %x = %s |< FIN"
-#define ARG1 "joie"
-#define ARG2 2564
+#define FORMAT "DEBUT >| %S + %p = %s |< FIN"
+#define ARG1 L"testé"
+#define ARG2 &a
 #define ARG3 "test"
 
 // clear && echo \*\*\* && gcc -Wall -Werror -Wextra -I. -L ../Libft -lft ft_printf.h main.c test.c aux1_split_format.c ft_printf_conversions1.c ft_printf_options1.c ft_printf_options2.c ft_printf_displays1.c ft_printf_displays2.c && ./a.out

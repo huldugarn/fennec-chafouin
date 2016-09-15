@@ -17,14 +17,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char		c_type(char *c)
-{
-	if (ft_strchr("\%npcCsSuUdDioOxXaAeEfFgG", (int)c) == NULL)
-		return ('\0');
-	else
-		return (*c);
-}
-
 char		*c_hub(char *s, va_list vl)
 {
 	char	*r;
@@ -51,8 +43,10 @@ char		*c_hub(char *s, va_list vl)
 		r = c_di(o, vl);
 	else if (o->ctyp == 'o' || o->ctyp == 'u' || o->ctyp == 'x')
 		r = c_oux(o, vl);
-//	else if (o.ctyp == 'n' || o.ctyp == 'p')
-//		(o.ctyp == 'n') ? (r = c_n(s, o, vl)) : (r = c_p(s, o, vl));
+	else if (o->ctyp == 'O' || o->ctyp == 'U' || o->ctyp == 'X')
+		r = c_OUX(o, vl);
+	else if (o->ctyp == 'p')
+		r = c_pointer(o, vl);
 
 //	else if (o.ctyp == 'C')
 //		r = c_C(s, o, vl);
@@ -66,23 +60,22 @@ char		*c_hub(char *s, va_list vl)
 //	ft_putendl("conversion hub ended"); // debug
 	return (r);
 }
-/*
-void		lmod_l(void **arg, t_opt *o, va_list vl)
+
+char						*c_pointer(t_opt *o, va_list vl)
 {
-	if (o->ctyp == 'c' || o->ctyp == 'C')
-		(wint_t)arg = va_arg(vl, wint_t);
-	if (o->ctyp == 's' || o->ctyp == 'S')
-		(wchar_t*)arg = va_arg(vl, wchar_t*);
-	if (ft_strchr("dDi", (int)o->ctyp) != NULL)
-		(long)arg = va_arg(vl, long);
-	if (ft_strchr("oOuUxX", (int)o->ctyp) != NULL)
-		(unsigned long)arg = va_arg(vl, unsigned long);
-	if (ft_strchr("aAeEfFgG", (int)o->ctyp) != NULL)
-		(double)arg = va_arg(vl, double);
-	if (o->ctyp == 'n')
-		(long*)arg = va_arg(vl, long*);
+	char					*r;
+	unsigned long long int	tmp;
+	int						l;
+
+	tmp = va_arg(vl, unsigned long long int);
+	r = ft_ullitoa_base(tmp, 16);
+	r = ft_strjoin(ft_strndup("0x7fffffffffff", 14 - ft_strlen(r)), r);
+	l = ft_strlen(r);
+	if (o->mfwd > l)
+		r = f_padd(r, o, l);
+	return (r);
 }
-*/
+
 char		*c_percent(t_opt *o, int l)
 {
 	char	*r;
@@ -120,7 +113,8 @@ char		*c_s(t_opt *o, va_list vl)
 	char	*r;
 	int		l;
 
-	r = va_arg(vl, char*);
+	if (!(r = va_arg(vl, char*)))
+		return ("(null)");
 	l = ft_strlen(r);
 	if (o->mfwd > l)
 		r = f_padd(r, o, l);
@@ -134,7 +128,8 @@ char		*c_S(t_opt *o, va_list vl)
 	int		l;
 
 	r = "\0";
-	s = va_arg(vl, wchar_t*);
+	if (!(s = va_arg(vl, wchar_t*)))
+		return ("(null)");
 	while (*s)
 		r = ft_strjoin(r, unicheck(*(s++)));
 	l = ft_strlen(r);
@@ -168,39 +163,68 @@ char				*c_di(t_opt *o, va_list vl)
 	l = ft_strlen(r);
 	if (o->mfwd > l)
 		r = f_padd(r, o, l);
+	if (o->prec == 0 && tmp == 0)
+		return ("");
 	return (r);
 }
 
-char						*c_oux(t_opt *o, va_list vl)
+char					*c_oux(t_opt *o, va_list vl)
 {
-	char					*r;
-	unsigned long long int	tmp;
-	int						l;
-	int						base;
+	char				*r;
+	unsigned long long	tmp;
+	int					l;
+	int					base;
 
-	if (o->ctyp == 'u')
+	if (o->ctyp == 'u' || o->ctyp == 'U')
 		base = 10;
 	else
-		(o->ctyp == 'o') ? (base = 2) : (base = 16);
-	tmp = va_arg(vl, unsigned long long int);
+		(o->ctyp == 'o' || o->ctyp == 'O') ? (base = 2) : (base = 16);
+	tmp = va_arg(vl, unsigned long long);
 	if (o->lmod == 1 || o->lmod == 21)
 		(o->lmod == 21) ? (tmp = (unsigned char)tmp) :
 		 (tmp = (unsigned short)tmp);
 	else if (o->lmod == 2)
 		tmp = (uintmax_t)tmp;
-	else if (o->lmod == 3 || o->lmod == 23 || o->ctyp == 'D')
+	else if (o->lmod == 3 || o->lmod == 23)
 		(o->lmod == 23) ? (tmp = (unsigned long long)tmp) :
 		 (tmp = (unsigned long)tmp);
 	else
 		tmp = (unsigned int)tmp;
-	printf("base = %d\n", base);
 	r = ft_ullitoa_base(tmp, base);
-	ft_putendl(r);
 	if (o->prec)	
 		r = f_prec(r, o, ft_strlen(r));
+	if (o->altf)
+		r = f_altf(r, o);
 	l = ft_strlen(r);
 	if (o->mfwd > l)
 		r = f_padd(r, o, l);
+	return (r);
+}
+
+char						*c_OUX(t_opt *o, va_list vl)
+{
+	char					*r;
+	int						i;
+
+	r = c_oux(o, vl);
+	i = 0;
+	while (r[i] != '\0')
+	{
+		r[i] = ft_toupper(r[i]);
+		++i;
+	}
+	return (r);
+}
+
+char		*f_altf(char *s, t_opt *o)
+{
+	char	*r;
+
+	if (o->ctyp == 'x' || o->ctyp == 'X' || o->ctyp == 'p')
+		ft_islower(o->ctyp) ? (r = ft_strjoin("0x", s)) :
+		 (r = ft_strjoin("0X", s));
+	else
+		r = s;
 	return (r);
 }
 
@@ -209,6 +233,8 @@ char	*f_prec(char *s, t_opt *o, int l)
 	char	*r;
 	int		i;
 
+	if ((o->ctyp == 'o' || o->ctyp == 'O') && o->altf)
+		++l;
 	r = ft_strnew(o->prec);
 	i = 0;
 	while (i < o->prec)
