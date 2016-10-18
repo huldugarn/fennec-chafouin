@@ -48,17 +48,17 @@ all : $(NAME)
 
 $(NAME): $(OBJ_NAME)
 	@$(ARCHIVES) $(NAME) $(OBJ_NAME)
-	@echo Library created.
+	@echo Libft       : Library created
 
 $(OBJ_NAME):
 	@$(CMP_NAME) $(CMP_FLAG) $(INC_PATH) -c $(SRC_NAME) 
 
 clean:
 	@$(DELETING) $(OBJ_NAME)
-	@echo Objects deleted.
+	@echo Libft       : Objects deleted
 
 fclean: clean
 	@$(DELETING) $(NAME)
-	@echo Library deleted.
+	@echo Libft       : Library deleted
 
 re: fclean all

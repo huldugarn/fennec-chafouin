@@ -17,12 +17,12 @@
 **	while (ft_power(2, i++) < n);
 */
 
-char		**ft_unicode(unsigned int n)
+char		**ft_unicode(unsigned long long int n)
 {
 	char	*b;
 	int		l;
 
-	b = ft_btoa(ft_itob(n));
+	b = ft_ullitoa_base(n, 2);
 	l = ft_strlen(b);
 	if (l < 12)
 		return (ft_unimask2(b, l));

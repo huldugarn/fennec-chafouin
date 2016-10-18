@@ -77,6 +77,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+int					ft_atoi_base(const char * str, int base);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 
@@ -103,6 +104,8 @@ int					ft_tolower(int c);
 
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
+void				ft_putwchar(wchar_t c);
+void				ft_putwchar_fd(wchar_t c, int fd);
 
 /*
 **	Integer(s) operations
@@ -126,14 +129,14 @@ void				ft_putnbr_fd(int n, int fd);
 /*
 **	ft_unicode
 */
-char				**ft_unicode(unsigned int n);
+char				**ft_unicode(unsigned long long int n);
 char				**ft_unimask2(char *b, int l);
 char				**ft_unimask3(char *b, int l);
 char				**ft_unimask4(char *b, int l);
 t_list				**ft_itob(unsigned int i);
 char				*ft_btoa(t_list **binary);
 unsigned int		ft_atob(const char *str);
-void				ft_putchar_uni(wchar_t c, int fd);
+
 
 /*
 **	Mono-linked lists operations

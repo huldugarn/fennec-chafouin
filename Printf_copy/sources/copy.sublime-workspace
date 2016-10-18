@@ -1,0 +1,407 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"CMP",
+				"CMPNAME"
+			],
+			[
+				"int",
+				"intmax_t"
+			],
+			[
+				"va_",
+				"va_arg"
+			],
+			[
+				"return",
+				"return_string"
+			],
+			[
+				"spli",
+				"splitted_format"
+			],
+			[
+				"o",
+				"o_pad"
+			],
+			[
+				"conte",
+				"content"
+			],
+			[
+				"content",
+				"content_size"
+			],
+			[
+				"for",
+				"formated_list"
+			],
+			[
+				"rende",
+				"render_string"
+			],
+			[
+				"segment",
+				"segments_list"
+			],
+			[
+				"fdf",
+				"fdf_0_header"
+			],
+			[
+				"OBJ",
+				"OBJFULL"
+			],
+			[
+				"O",
+				"OBJFULL"
+			],
+			[
+				"INC",
+				"INCPATH"
+			],
+			[
+				"S",
+				"SRCNAME"
+			],
+			[
+				"E",
+				"Executable"
+			],
+			[
+				"g",
+				"gs_x"
+			],
+			[
+				"ft_",
+				"ft_atoi"
+			],
+			[
+				"z",
+				"z"
+			],
+			[
+				"si",
+				"sizeof"
+			],
+			[
+				"di",
+				"display_z"
+			],
+			[
+				"tr",
+				"y_translate"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/test.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Printf/test.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux4_conversions_num.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/main.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux2_conversions_hub.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux4_conversions_num.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux3_conversions_alpha.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux3_conversions_alpha.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux2_conversions_hub.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux0_options_management.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux1_options_lengths.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux1_options_lengths.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux0_options_management.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/ft_printf.h",
+		"/nfs/2015/r/rle-corr/Projects/Fillit/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/main.c",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/libft/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Libft/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Copy_Print_f/aux5_unicode.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/sources/main.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/sources/aux0_options_management.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/sources/aux2_conversions_hub.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/sources/aux4_conversions_num.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_mod/includes/ft_printf.h",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/Elifekam",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/aux5_unicode.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/sources/._copy.sublime-project",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/main.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf.h",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux2_conversions_hub.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux1_options_lengths.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux4_conversions_num.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux3_conversions_alpha.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux0_options_management.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf.h.gch",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_options1.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/proto.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_conversions3.c",
+		"/Volumes/Storage/cache/library.rle-corr/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_conversions1.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_displays1.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_lengthmod4.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_conversions2.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/aux1_split_format.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf_copy/ft_printf_displays2.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_options2.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_options1.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_conversions1.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/libft.h",
+		"/nfs/2015/r/rle-corr/Projects/Printf/main.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf.h",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_itoa.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_toupper.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_displays2.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_lstpushback.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_lstnew.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_unicode.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_strndup.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_conversions2.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/aux1_split_format.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_strclr.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_strnjoin.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/essais.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_strnew.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf_lengthmod1.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_putstr.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_lstmap.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_lstadd.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_lstiter.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/Printf/proto.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_strsplit.c",
+		"/nfs/2015/r/rle-corr/Projects/Printf/ft_printf.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/FdF/includes/fdf_0_header.h",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_6_auxiliary_drawing.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_5_auxiliary_calculations.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_4_auxiliary_interactions.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_3_auxiliary_mlx_hooks.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_2_auxiliary_input_parsing.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/sources/fdf_1_main.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/Libft/Makefile",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_0_header.h",
+		"/nfs/2015/r/rle-corr/Projects/FdF/auteur",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_maths.c",
+		"/nfs/2015/r/rle-corr/Projects/Libft/ft_squareroot.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf",
+		"/nfs/2015/r/rle-corr/Projects/FdF/Libft/libft.h",
+		"/nfs/2015/r/rle-corr/Projects/FdF/Libft/ft_itoa.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_1_main.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_5_auxiliary_calculations.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_6_auxiliary_drawing.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_4_auxiliary_interactions.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_3_auxiliary_mlx_hooks.c",
+		"/nfs/2015/r/rle-corr/Projects/FdF/fdf_2_auxiliary_input_parsing.c"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"{}",
+			"L",
+			"e",
+			"''",
+			"s_format",
+			"%%",
+			"->",
+			"list",
+			"cursor",
+			"format",
+			"segments_count",
+			"*format",
+			"incr",
+			"rv",
+			"opt_S",
+			"rv",
+			"itoa",
+			"color",
+			"e->"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"t",
+			"s_tab",
+			"c",
+			".",
+			"s_format",
+			"i",
+			"segment",
+			"n",
+			"*f",
+			"return_value",
+			"opt_s",
+			"return_value",
+			"patate->"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.504220444375,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "copy.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

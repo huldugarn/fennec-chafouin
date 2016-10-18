@@ -38,17 +38,7 @@ int					ft_atoi(const char *str)
 	return ((int)(nbr * sign));
 }
 
-unsigned int		ft_atob(const char *str)
+int					ft_atoi_base(const char *str, int base)
 {
-	long			nbr;
-	unsigned int	i;
-
-	nbr = 0;
-	i = 0;
-	while (ft_isdigit(str[i]))
-	{
-		nbr = nbr * 2 + str[i] - '0';
-		i++;
-	}
-	return ((unsigned int)nbr);
+	return (ft_atoi(ft_itoa_base(ft_atoi(str), base)));
 }

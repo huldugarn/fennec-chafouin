@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int			ft_printf(const char *restrict format, ...)
 {
@@ -22,6 +22,8 @@ int			ft_printf(const char *restrict format, ...)
 	setlocale(LC_ALL, "en_US.UTF-8");
 	va_start(vl, format);
 	splitted_format = NULL;
+	if (format[0] == '\0')
+		return (0);
 	if (!(format) || !(splitted_format = ft_pf_splist((char *)format, 0)))
 		ft_pf_exit("ft_printf failed: format related error");
 	formated_list = ft_pf_formap(splitted_format, vl);

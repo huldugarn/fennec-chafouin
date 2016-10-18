@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 char					*c_pointer(t_opt *o, va_list vl)
 {
@@ -60,8 +60,10 @@ char					*c_oux(t_opt *o, va_list vl)
 		base = 2;
 	else
 		base = 10;
-	tmp = type_cast_unsigned(o, vl);
-	r = ft_ullitoa_base(tmp, base);
+	if ((tmp = type_cast_unsigned(o, vl)) == 0)
+		r = "0";
+	else
+		r = ft_ullitoa_base(tmp, base);
 	if (o->prec)
 		r = f_prec(r, o, ft_strlen(r));
 	if (o->altf)

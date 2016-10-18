@@ -44,8 +44,8 @@ char					*ft_itoa_base(int value, int base)
 	int					l;
 	int					v;
 
-	if (base == 0)
-		return (NULL);
+	if (base == 0 || value == -2147483648)
+		return (base == 0 ? NULL : ft_strcpy(s, "-2147483648"));
 	if ((v = value) < 0)
 		return (s = ft_strjoin("-\0", ft_itoa_base(-value, base)));
 	while (v != 0)
@@ -113,7 +113,7 @@ char					*ft_ullitoa_base(unsigned long long value, int base)
 	int					l;
 	unsigned long long	v;
 
-	if (base == 0)
+	if (base == 0 || )
 		return (NULL);
 	v = value;
 	l = 0;

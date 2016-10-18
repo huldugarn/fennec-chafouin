@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_uni.c                                   :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 11:40:36 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/03/24 17:48:38 by rle-corr         ###   ########.fr       */
+/*   Created: 2015/11/26 15:32:52 by rle-corr          #+#    #+#             */
+/*   Updated: 2015/12/29 14:08:19 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_putchar_uni(wchar_t c, int fd)
+int	ft_isdigit(int c)
 {
-	char	**c_uni;
-	int		i;
-	char	r;
-
-	if ((unsigned int)c <= 127)
-		write(fd, &c, 1);
+	if (c >= 48 && c <= 57)
+		return (1);
 	else
-	{
-		c_uni = ft_unicode((unsigned int)c);
-		i = 0;
-		while (c_uni[i] != 0)
-		{
-			r = ft_atob(c_uni[i]);
-			write(fd, &(r), 1);
-			i++;
-		}
-	}
+		return (0);
 }
