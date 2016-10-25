@@ -119,24 +119,19 @@ int					ft_squareroot(int n);
 
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
-char				*ft_llitoa(long long n);
-char				*ft_ullitoa(unsigned long long n);
+char				*ft_llitoa_base(long long n, int base);
 char				*ft_ullitoa_base(unsigned long long value, int base);
 
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 
 /*
-**	ft_unicode
+**	ft_unicode.c
 */
 char				**ft_unicode(unsigned long long int n);
-char				**ft_unimask2(char *b, int l);
-char				**ft_unimask3(char *b, int l);
-char				**ft_unimask4(char *b, int l);
-t_list				**ft_itob(unsigned int i);
-char				*ft_btoa(t_list **binary);
-unsigned int		ft_atob(const char *str);
-
+char				*ft_unimask2(char *b, int l);
+char				*ft_unimask3(char *b, int l);
+char				*ft_unimask4(char *b, int l);
 
 /*
 **	Mono-linked lists operations

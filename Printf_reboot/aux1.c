@@ -51,9 +51,9 @@ void	pf_check_prec_mfwd(t_pfs *pfs, const char *restrict format,
 	while (format[i] != pfs->ctyp)
 	{
 		if (format[i] == '.')
-			pf_fw_prec(pfs, format, vl, &i);
+			pf_check_prec(pfs, format, vl, &i);
 		else if (ft_isdigit(format[i]) || format[i] == '*')
-			pf_fw_mfwd(pfs, format, vl, &i);
+			pf_check_mfwd(pfs, format, vl, &i);
 		else
 			i++;
 	}

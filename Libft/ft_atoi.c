@@ -12,33 +12,35 @@
 
 #include "libft.h"
 
-int					ft_atoi(const char *str)
+int					ft_atox_index_in_base(char c, const char *base)
 {
-	long			nbr;
-	long			sign;
-	unsigned int	i;
+	int				i;
 
-	nbr = 0;
-	sign = 1;
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v'
-			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\f')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		nbr = nbr * 10 + str[i] - '0';
-		i++;
-	}
-	return ((int)(nbr * sign));
+	while (base[i] && base[i] != c)
+		++i;
+	return (i);
 }
 
-int					ft_atoi_base(const char *str, int base)
+int					ft_atoi_base(const char *str, const char *base)
 {
-	return (ft_atoi(ft_itoa_base(ft_atoi(str), base)));
+	int				n;
+	int				s;
+	int				l;
+
+	n = 0;
+	s = 1;
+	l = ft_strlen(base);
+	while (ft_strchr(" \t\v\r\n\f", *str) != NULL)
+		++i;
+	if (*str == '-' || *str == '+')
+		sign = (*str++ == '-') ? -1 : 1;
+	while (ft_atox_index_in_base(*str, base) < l)
+		n = (n * l) + ft_atox_index_in_base(*str++, base);
+	return (n * s);
+}
+
+int					ft_atoi(const char *str)
+{
+	return (ft_atoi_base(str, "0123456789"));
 }

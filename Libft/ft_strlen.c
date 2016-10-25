@@ -12,14 +12,48 @@
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
-	int		position;
+	int		l;
 
-	position = 0;
-	while (str[position] != '\0')
+	l = 0;
+	while (str[l] != '\0')
+		++l;
+	return (l);
+}
+
+int			ft_wchar_width(wchar_t wchar)
+{
+	int		width;
+	char	*binary;
+	int		binlen;
+
+	width = 0;
+	binary = ft_ullitoa_base((unsigned long long int)wchar, 2);
+	binlen = ft_strlen(binary);
+	if (binlen < 8)
+		width = 1;
+	else if (binlen < 12)
+		width = 2;
+	else if (binlen < 17)
+		width = 3;
+	else
+		width = 4;
+	free(binlen);
+	return (width);
+}
+
+int			ft_wstrlen(wchar_t *wstr)
+{
+	int		l;
+	int		i;
+
+	l = 0;
+	i = 0;
+	while (wstr[i] != L'\0')
 	{
-		position++;
+		l = l + ft_wchar_width(wstr[i]);
+		++i;
 	}
-	return (position);
+	return (l)
 }

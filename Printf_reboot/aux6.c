@@ -5,59 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle-corr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 12:22:48 by rle-corr          #+#    #+#             */
-/*   Updated: 2016/10/11 12:22:51 by rle-corr         ###   ########.fr       */
+/*   Created: 2016/10/25 16:26:05 by rle-corr          #+#    #+#             */
+/*   Updated: 2016/10/25 16:26:12 by rle-corr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int			pf_ascii_display(t_pfs *pfs)
+void		pf_as_pad_insert(char **destination, char *insert, int position)
 {
-	int		n;
+	char	*prefix;
+	char	*suffix;
 
-	n = 0;
-	if (pfs->ncex == 0)
-	{
-		n = ft_strlen(pfs->ascii_str);
-		ft_putstr(pfs->ascii_str);
-	}
-	else
-	{
-		while (pfs->ascii_str[n])
-		{
-			if (pfs->ascii_str[n] == ' ')
-				ft_putchar('\0');
-			else
-				ft_putchar(ascii_str[n]);
-			++n;
-		}
-	}
-	free(pfs->ascii_str);
-	return (n);
+	prefix = ft_strndup(*destination, position);
+	suffix = ft_strdup(*destination + position);
+	free(*destination);
+	*destination = ft_strjoin(prefix, insert);
+	free(prefix);
+	prefix = ft_strdup(*destination);
+	free(*destination);
+	*destination = ft_strjoin(prefix, suffix);
+	free(prefix);
+	free(suffix);
 }
 
-int			pf_wchar_display(t_pfs *pfs)
+void		pf_as_pad_append(char **destination, char *insert)
 {
-	int		n;
+	char	*prefix;
 
-	n = 0;
-	if (pfs->ncex == 0)
-	{
-		n = ft_uni_strlen(pfs->wchar_str);
-		ft_uni_putstr(pfs->wchar_str);
-	}
-	else
-	{
-		while (pfs->wchar_str[n] != L'\0')
-		{
-			if (pfs->wchar_str[n] == L' ')
-				ft_uni_putchar(L'\0');
-			else
-				ft_uni_putchar(wchar_str[n]);
-			++n;
-		}
-	}
-	free(pfs->wchar_str);
-	return (n);
+	prefix = ft_strdup(*destination);
+	free(*destination);
+	*destination = ft_strjoin(prefix, insert);
+	free(prefix);
+}
+
+void		pf_wc_pad_insert(wchar_t **dest, wchar_t *insert, int position)
+{
+	wchar_t	*prefix;
+	wchar_t	*suffix;
+
+	prefix = ft_uni_strndup(*dest, position);
+	suffix = ft_uni_strdup(*dest + position);
+	free(*dest);
+	*dest = ft_uni_strjoin(prefix, insert);
+	free(prefix);
+	prefix = ft_uni_strdup(*dest);
+	free(*dest);
+	*dest = ft_uni_strjoin(prefix, suffix);
+	free(prefix);
+	free(suffix);
+}
+
+void		pf_wc_pad_append(wchar_t **dest, wchar_t *insert)
+{
+	wchar_t	*prefix;
+
+	prefix = ft_uni_strdup(*dest);
+	free(*dest);
+	*dest = ft_uni_strjoin(prefix, insert);
+	free(prefix);
 }

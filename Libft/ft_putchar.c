@@ -39,9 +39,9 @@ void		ft_putwchar_fd(wchar_t c, int fd)
 	{
 		c_uni = ft_unicode((unsigned long long int)c);
 		i = 0;
-		while (c_uni[i] != 0)
+		while (c_uni[i] != NULL)
 		{
-			r = ft_atoi_base(c_uni[i], 10);
+			r = ft_atoi_base(c_uni[i], "01\0");
 			write(fd, &(r), 1);
 			i++;
 		}
