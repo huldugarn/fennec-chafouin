@@ -10,34 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "printf.h"
-
-int			pf_read_and_display(const char *restrict format, va_list *vl)
-{
-	t_pfs	pfs;
-	int		i;
-
-	pf_structure_init(&pfs);
-	pf_options_assign(&pfs, format);
-	if (pfs.ctyp == '\0')
-		return (0);
-	pf_check_pads(&pfs, format);
-	pf_check_lmod(&pfs, format);
-	pf_check_prec_mfwd(&pfs, format, vl);
-	pf_gestion_params(&pfs, vl);
-	if (pfs.ascii_str != NULL)
-		return (pf_ascii_manage(&pfs));
-	else if (pfs.wchar_str != NULL)
-		return (pf_wchar_manage(&pfs));
-	else
-		return (0);
-}
 
 static void	pf_structure_init(t_pfs *pfs)
 {
-	pfs->flag = '0';
-	pfs->prec = 0;
+	pfs->sign = '0';
+	pfs->prec = -1;
 	pfs->prec_flag = 0;
 	pfs->mfwd = 0;
 	pfs->mfwd_flag = 0;
@@ -49,9 +27,9 @@ static void	pf_structure_init(t_pfs *pfs)
 	pfs->wchar_str = NULL;
 }
 
-static void	pf_options_assign(const char *restric format, t_pfs *pfs)
+static void	pf_options_assign(t_pfs *pfs, const char *restrict format)
 {
-	while (ft_strchr(" .*#+-0123456789jhlLz") != NULL && *format)
+	while (ft_strchr(PF_FC, *format) != NULL && *format)
 	{
 		if (*format == '#')
 			pfs->altf = 1;
@@ -61,10 +39,10 @@ static void	pf_options_assign(const char *restric format, t_pfs *pfs)
 			pfs->pads = 'r';
 		}
 		if (*format == '+')
-			pfs->pads = '+';
-		if (*format == ' ' && pfs->flag != '+')
-			pfs->pads = ' ';
-		*format++;
+			pfs->sign = '+';
+		if (*format == ' ' && pfs->sign != '+')
+			pfs->sign = ' ';
+		++format;
 	}
 	pfs->ctyp = (char)*format;
 }
@@ -72,14 +50,14 @@ static void	pf_options_assign(const char *restric format, t_pfs *pfs)
 static int	pf_ascii_manage(t_pfs *pfs)
 {
 	pf_ascii_prec(pfs);
-	pf_options_management(pfs);
+	pf_sign_management(pfs);
 	if (pfs->altf == 1)
 		pf_format_alternate(pfs);
 	if (pfs->mfwd_flag == 1 && pfs->negation == 0 && pfs->prec <= 0)
 		pf_ascii_width_comp(pfs);
 	else
 		pf_ascii_width(pfs);
-	return (pf_ascii_display(pfs))
+	return (pf_ascii_display(pfs));
 }
 
 static int	pf_wchar_manage(t_pfs *pfs)
@@ -89,5 +67,25 @@ static int	pf_wchar_manage(t_pfs *pfs)
 		pf_wchar_width_comp(pfs);
 	else
 		pf_wchar_width(pfs);
-	return (pf_wchar_display(pfs))
+	return (pf_wchar_display(pfs));
+}
+
+int			pf_read_and_display(const char *restrict format, va_list *vl)
+{
+	t_pfs	pfs;
+
+	pf_structure_init(&pfs);
+	pf_options_assign(&pfs, format);
+	if (pfs.ctyp == '\0')
+		return (0);
+	pf_check_pads(&pfs, format);
+	pf_check_lmod(&pfs, format);
+	pf_check_prec_mfwd(&pfs, format, vl);
+	pf_conversion_hub1(vl, &pfs);
+	if (pfs.ascii_str != NULL)
+		return (pf_ascii_manage(&pfs));
+	else if (pfs.wchar_str != NULL)
+		return (pf_wchar_manage(&pfs));
+	else
+		return (0);
 }

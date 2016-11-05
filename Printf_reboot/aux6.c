@@ -19,7 +19,6 @@ void		pf_as_pad_insert(char **destination, char *insert, int position)
 
 	prefix = ft_strndup(*destination, position);
 	suffix = ft_strdup(*destination + position);
-	free(*destination);
 	*destination = ft_strjoin(prefix, insert);
 	free(prefix);
 	prefix = ft_strdup(*destination);
@@ -44,14 +43,14 @@ void		pf_wc_pad_insert(wchar_t **dest, wchar_t *insert, int position)
 	wchar_t	*prefix;
 	wchar_t	*suffix;
 
-	prefix = ft_uni_strndup(*dest, position);
-	suffix = ft_uni_strdup(*dest + position);
+	prefix = ft_wstrndup(*dest, position);
+	suffix = ft_wstrdup(*dest + position);
 	free(*dest);
-	*dest = ft_uni_strjoin(prefix, insert);
+	*dest = ft_wstrjoin(prefix, insert);
 	free(prefix);
-	prefix = ft_uni_strdup(*dest);
+	prefix = ft_wstrdup(*dest);
 	free(*dest);
-	*dest = ft_uni_strjoin(prefix, suffix);
+	*dest = ft_wstrjoin(prefix, suffix);
 	free(prefix);
 	free(suffix);
 }
@@ -60,8 +59,8 @@ void		pf_wc_pad_append(wchar_t **dest, wchar_t *insert)
 {
 	wchar_t	*prefix;
 
-	prefix = ft_uni_strdup(*dest);
+	prefix = ft_wstrdup(*dest);
 	free(*dest);
-	*dest = ft_uni_strjoin(prefix, insert);
+	*dest = ft_wstrjoin(prefix, insert);
 	free(prefix);
 }

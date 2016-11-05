@@ -51,6 +51,8 @@ void			pf_conv_unsigned(va_list *vl, t_pfs *pfs)
 
 void			pf_conv_hexadecimal(va_list *vl, t_pfs *pfs)
 {
+	int			i;
+
 	if (ft_strcmp(pfs->lmod, "l") == 0)
 		pfs->ascii_str = ft_ullitoa_base(va_arg(*vl, long unsigned), 16);
 	else if (ft_strcmp(pfs->lmod, "ll") == 0)
@@ -64,11 +66,12 @@ void			pf_conv_hexadecimal(va_list *vl, t_pfs *pfs)
 			(unsigned char)(va_arg(*vl, unsigned int)), 16);
 	else
 		pfs->ascii_str = ft_ullitoa_base(va_arg(*vl, unsigned int), 16);
+	i = 0;
 	if (pfs->ctyp == 'X')
-		while (*(pfs->ascii_str))
+		while (pfs->ascii_str[i])
 		{
-			*(pfs->ascii_str = ft_toupper((char)*(pfs->ascii_str)));
-			*(pfs->ascii_str)++;
+			pfs->ascii_str[i] = ft_toupper(pfs->ascii_str[i]);
+			++i;
 		}
 }
 
@@ -88,13 +91,10 @@ void			pf_conv_double(va_list *vl, t_pfs *pfs)
 	if ((integer = pfs->prec) == -1)
 		integer = 6;
 	while (integer-- > 0)
-//	{
 		decimal = decimal * (double)10;
-//		--integer;
-//	}
 	pf_conv_double_round_up(&decimal);
 	str = ft_itoa((long long)decimal);
-	ft_strjoin(ft_strcpy(pfs->ascii_str), str);
+	ft_strjoin(pfs->ascii_str, str);
 	free(str);
 	if (pfs->ascii_str == NULL)
 		pfs->ascii_str = ft_strdup("(null)");
@@ -113,5 +113,5 @@ void			pf_conv_double_round_up(double *decimal)
 	d = (int)(d * 10);
 	*decimal = (int)*decimal;
 	if (d >= 6)
-		*decimal == *decimal + 1;
+		*decimal = *decimal + 1;
 }

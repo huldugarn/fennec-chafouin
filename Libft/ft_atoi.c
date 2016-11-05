@@ -27,16 +27,18 @@ int					ft_atoi_base(const char *str, const char *base)
 	int				n;
 	int				s;
 	int				l;
+	int				i;
 
 	n = 0;
 	s = 1;
 	l = ft_strlen(base);
-	while (ft_strchr(" \t\v\r\n\f", *str) != NULL)
+	i = 0;
+	while (ft_strchr(" \t\v\r\n\f", str[i]) != NULL)
 		++i;
-	if (*str == '-' || *str == '+')
-		sign = (*str++ == '-') ? -1 : 1;
-	while (ft_atox_index_in_base(*str, base) < l)
-		n = (n * l) + ft_atox_index_in_base(*str++, base);
+	if (str[i] == '-' || str[i] == '+')
+		s = (str[i++] == '-') ? -1 : 1;
+	while (ft_atox_index_in_base(str[i], base) < l)
+		n = (n * l) + ft_atox_index_in_base(str[i++], base);
 	return (n * s);
 }
 

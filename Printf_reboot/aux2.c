@@ -10,19 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "printf.h"
 
-void	pf_conversion_hub1(va_list *vl, t_pfs *pfs)
+void			pf_conversion_hub1(va_list *vl, t_pfs *pfs)
 {
-	if (pfs->ctyp = 's' || pfs->ctyp = 'S')
+	if (pfs->ctyp == 's' || pfs->ctyp == 'S')
 	{
 		if (pfs->lmod[0] == 'l' || pfs->ctyp == 'S')
-			pfs->wchar_str = ft_uni_strdup(va_arg(*vl, wchar_t*));
+			pfs->wchar_str = ft_wstrdup(va_arg(*vl, wchar_t*));
 		else
 			pfs->ascii_str = ft_strdup(va_arg(*vl, char*));
 	}
-	else if (pfs->ctyp = 'c' || pfs->ctyp = 'C')
+	else if (pfs->ctyp == 'c' || pfs->ctyp == 'C')
 	{
 		if (pfs->lmod[0] == 'l' || pfs->ctyp == 'C')
 			pf_conv_wchar(vl, pfs);
@@ -34,15 +33,15 @@ void	pf_conversion_hub1(va_list *vl, t_pfs *pfs)
 	else
 		pf_conversion_hub2(vl, pfs);
 	if (pfs->ascii_str == NULL && pfs->wchar_str == NULL)
-		pfs->ascii_str == ft_strdup("(null)");
+		pfs->ascii_str = ft_strdup("(null)");
 }
 
-void	pf_conversion_hub2(va_list *vl, t_pfs *pfs)
+void			pf_conversion_hub2(va_list *vl, t_pfs *pfs)
 {
 	if (pfs->ctyp == 'p')
 	{
 		pfs->ascii_str = ft_ullitoa_base(va_arg(*vl, unsigned long long), 16);
-		pfs->alternate = 1;
+		pfs->altf = 1;
 	}
 	else if (pfs->ctyp == 'o' || pfs->ctyp == 'O')
 		pf_conv_octal(vl, pfs);
@@ -56,11 +55,11 @@ void	pf_conversion_hub2(va_list *vl, t_pfs *pfs)
 	{
 		pfs->ascii_str = (char*)ft_memalloc(sizeof(char) * 2);
 		ft_bzero(pfs->ascii_str, 2);
-		pfs->ascii_str = pfs_ctyp;
+		pfs->ascii_str[0] = pfs->ctyp;
 	}
 }
 
-void	pf_conv_wchar(va_list *vl, t_pfs *pfs)
+void			pf_conv_wchar(va_list *vl, t_pfs *pfs)
 {
 	pfs->wchar_str = (wchar_t*)ft_memalloc(sizeof(wchar_t) * 2);
 	pfs->wchar_str[0] = va_arg(*vl, wchar_t);
@@ -72,32 +71,41 @@ void	pf_conv_wchar(va_list *vl, t_pfs *pfs)
 	}
 }
 
-void	pf_conv_char(va_list *vl, t_pfs *pfs)
+void			pf_conv_char(va_list *vl, t_pfs *pfs)
 {
-	pfs->wchar_str = (char*)ft_memalloc(sizeof(char) * 2);
-	pfs->wchar_str[0] = va_arg(*vl, int);
-	pfs->wchar_str[1] = '\0';
-	if (pfs->wchar_str[0] == '\0')
+	pfs->ascii_str = (char*)ft_memalloc(sizeof(char) * 2);
+	pfs->ascii_str[0] = va_arg(*vl, int);
+	pfs->ascii_str[1] = '\0';
+	if (pfs->ascii_str[0] == '\0')
 	{
 		pfs->ncex = 1;
-		pfs->wchar_str[0] = ' ';
+		pfs->ascii_str[0] = ' ';
 	}
 }
 
-void	pf_conv_integer(va_list *vl, t_pfs *pfs)
+void			pf_conv_integer(va_list *vl, t_pfs *pfs)
 {
+	short int	i;
+	char		c;
+
 	if (ft_strcmp(pfs->lmod, "l") == 0 || pfs->ctyp == 'D')
-		pfs->ascii_str = ft_itoa_base(va_arg(*vl, long int), 10);
+		pfs->ascii_str = ft_llitoa_base(va_arg(*vl, long), 10);
 	else if (ft_strcmp(pfs->lmod, "ll") == 0)
-		pfs->ascii_str = ft_itoa_base(va_arg(*vl, long long int), 10);
+		pfs->ascii_str = ft_llitoa_base(va_arg(*vl, long long), 10);
 	else if (ft_strcmp(pfs->lmod, "z") == 0)
-		pfs->ascii_str = ft_itoa_base(va_arg(*vl, unsigned long long int), 10);
+		pfs->ascii_str = ft_ullitoa_base(va_arg(*vl, unsigned long long), 10);
 	else if (ft_strcmp(pfs->lmod, "j") == 0)
-		pfs->ascii_str = ft_itoa_base(va_arg(*vl, intmax_t), 10);
+		pfs->ascii_str = ft_ullitoa_base(va_arg(*vl, intmax_t), 10);
 	else if (ft_strcmp(pfs->lmod, "h") == 0)
-		pfs->ascii_str = ft_itoa_base((char)(va_arg(*vl, int)), 10);
+	{
+		i = va_arg(*vl, int);
+		pfs->ascii_str = ft_itoa_base(i, 10);
+	}
 	else if (ft_strcmp(pfs->lmod, "hh") == 0)
-		pfs->ascii_str = ft_itoa_base((short int)(va_arg(*vl, int)), 10);
+	{
+		c = va_arg(*vl, int);
+		pfs->ascii_str = ft_itoa_base(c, 10);
+	}
 	else
 		pfs->ascii_str = ft_itoa_base(va_arg(*vl, int), 10);
 }

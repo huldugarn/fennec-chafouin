@@ -12,21 +12,21 @@
 
 #include "printf.h"
 
-void			pf_ascii_prec_init(t_pfs *pfs, int *width, int *n)
+void	pf_ascii_prec_init(t_pfs *pfs, int *width, int *n)
 {
 	*n = pfs->prec;
 	*width = ft_strlen(pfs->ascii_str);
 	if (*(pfs->ascii_str) == '-' || *(pfs->ascii_str) == '+')
-		*width = *width - 1; 
+		*width = *width - 1;
 }
 
-void			pf_ascii_prec(t_pfs *pfs)
+void	pf_ascii_prec(t_pfs *pfs)
 {
-	int			width;
-	int			n;
+	int	width;
+	int	n;
 
 	pf_ascii_prec_init(pfs, &width, &n);
-	if (n >= 0 && pfs->ctyp != '%' && pfs->ctyp != 'c' 
+	if (n >= 0 && pfs->ctyp != '%' && pfs->ctyp != 'c'
 		&& pfs->ctyp != 'f' && pfs->ctyp != 'F')
 	{
 		if (n == 0 && *(pfs->ascii_str) == '0')
@@ -38,29 +38,29 @@ void			pf_ascii_prec(t_pfs *pfs)
 			while (n > width)
 			{
 				if (pfs->ctyp == 'x' || pfs->ctyp == 'X')
-					ft_as_pad_insert(&(pfs->ascii_str), "0", 0);
+					pf_as_pad_insert(&(pfs->ascii_str), "0", 0);
 				else if (*(pfs->ascii_str) == '+' || *(pfs->ascii_str) == '-')
-					ft_as_pad_insert(&(pfs->ascii_str), "0", 1);
+					pf_as_pad_insert(&(pfs->ascii_str), "0", 1);
 				else
-					ft_as_pad_insert(&(pfs->ascii_str), "0", 0);
+					pf_as_pad_insert(&(pfs->ascii_str), "0", 0);
 				--n;
 			}
 		}
 	}
 }
 
-void			pf_wchar_prec_init(t_pfs *pfs, int *width, int *n, int *i)
+void	pf_wchar_prec_init(t_pfs *pfs, int *width, int *n, int *i)
 {
 	*n = pfs->prec;
 	*width = 0;
 	*i = -1;
 }
 
-void			pf_wchar_prec(t_pfs *pfs)
+void	pf_wchar_prec(t_pfs *pfs)
 {
-	int			width;
-	int			n;
-	int			i;
+	int	width;
+	int	n;
+	int	i;
 
 	pf_wchar_prec_init(pfs, &width, &n, &i);
 	if (n >= 0 && pfs->ctyp != '%' && pfs->ctyp != 'c')
@@ -78,4 +78,3 @@ void			pf_wchar_prec(t_pfs *pfs)
 		}
 	}
 }
-

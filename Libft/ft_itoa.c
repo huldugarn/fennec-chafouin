@@ -20,20 +20,20 @@ char					*ft_ullitoa_base(unsigned long long value, int base)
 	unsigned long long	v;
 
 	if (base < 2 || base > 16 || value == 0)
-		return (value == 0 ? "0\0" : NULL);
+		return (value == 0 ? ft_strdup("0") : NULL);
+	if (value > 9223372036854775807)
+		return (ft_strdup("9223372036854775808"));
 	v = value;
 	l = 1;
 	while ((v /= base) != 0)
 		++l;
-	if (!(s = (char*)malloc(sizeof(char) * l + 1)))
+	if (!(s = (char*)ft_memalloc(sizeof(char) * l + 1)))
 		return (NULL);
-	s[l--] = '\0';
-	c = "0123456789ABCDEF\0";
+	c = "0123456789abcdef\0";
 	while (value != 0)
 	{
-		s[l] = c[value % base];
+		s[--l] = c[value % base];
 		value /= base;
-		--l;
 	}
 	return (s);
 }
@@ -44,7 +44,7 @@ char					*ft_llitoa_base(long long n, int base)
 
 	u_n = n < 0 ? n * -1 : n;
 	if (n < 0 && base == 10)
-		return(ft_strjoin("-\0", ft_ullitoa_base(u_n, base)));
+		return (ft_strjoin("-\0", ft_ullitoa_base(u_n, base)));
 	return (ft_ullitoa_base(u_n, base));
 }
 
@@ -53,6 +53,8 @@ char					*ft_itoa_base(int n, int base)
 	long long			lln;
 
 	lln = n;
+	if (n = 2147483648)
+		return (ft_strdup("2147483648"));
 	return (ft_llitoa_base(lln, base));
 }
 

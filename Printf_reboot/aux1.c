@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "printf.h"
 
 void	pf_check_pads(t_pfs *pfs, const char *restrict format)
@@ -20,7 +19,7 @@ void	pf_check_pads(t_pfs *pfs, const char *restrict format)
 	{
 		if (*format == '-')
 			pfs->pads = 'r';
-		format++;
+		++format;
 	}
 }
 
@@ -31,14 +30,14 @@ void	pf_check_lmod(t_pfs *pfs, const char *restrict format)
 
 	i = 0;
 	width = 0;
-	while (*format != pfs->ctyp && *format)
+	while (format[i] != pfs->ctyp && format[i])
 	{
-		if (ft_strchr("jhlLz", (char)*format))
+		if (ft_strchr("jhlLz", format[i]))
 		{
-			pfs->lmod[width] = (char)*format;
-			width++;
+			pfs->lmod[width] = format[i];
+			++width;
 		}
-		i++;
+		++i;
 	}
 }
 
@@ -55,7 +54,7 @@ void	pf_check_prec_mfwd(t_pfs *pfs, const char *restrict format,
 		else if (ft_isdigit(format[i]) || format[i] == '*')
 			pf_check_mfwd(pfs, format, vl, &i);
 		else
-			i++;
+			++i;
 	}
 	if (pfs->mfwd < 0)
 	{
@@ -68,15 +67,15 @@ void	pf_check_prec_mfwd(t_pfs *pfs, const char *restrict format,
 void	pf_check_prec(t_pfs *pfs, const char *restrict format,
 		va_list *vl, int *i)
 {
-	*i++;
+	*i = *i + 1;
 	if (ft_isdigit(format[*i]))
 		pfs->prec = ft_atoi(format + *i);
 	else if (format[*i] == '*')
 		pfs->prec = va_arg(*vl, long long int);
 	else
 		pfs->prec = 0;
-	while (ft_isdigit(format[*i]) || format[*i] == '*')
-		*i++;
+	while (ft_isdigit(format[*i]) == 1 || format[*i] == '*')
+		*i = *i + 1;
 }
 
 void	pf_check_mfwd(t_pfs *pfs, const char *restrict format,
@@ -94,9 +93,9 @@ void	pf_check_mfwd(t_pfs *pfs, const char *restrict format,
 		pfs->mfwd = va_arg(*vl, int);
 	else
 		pfs->mfwd = ft_atoi(format + *i);
-	if (ft_isdigit(format[*i]))
-		while (ft_isdigit(format[*i]))
-			*i++;
+	if (ft_isdigit(format[*i]) == 1)
+		while (ft_isdigit(format[*i]) == 1)
+			*i = *i + 1;
 	else
-		*i++;
+		*i = *i + 1;
 }

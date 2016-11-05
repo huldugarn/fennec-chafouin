@@ -36,7 +36,7 @@ void		pf_ascii_width_comp(t_pfs *pfs)
 	int		width;
 	int		n;
 
-	pf_width_init(pfs, &widthm &n, 1);
+	pf_width_init(pfs, &width, &n, 1);
 	if (n == 0)
 		n = 1;
 	if (n > width)
@@ -47,7 +47,7 @@ void		pf_ascii_width_comp(t_pfs *pfs)
 					(pfs->altf == 1 && (pfs->ctyp == 'x' || pfs->ctyp == 'X')))
 					pf_as_pad_insert(&(pfs->ascii_str), "0", 2);
 				else if (*(pfs->ascii_str) == '+' || *(pfs->ascii_str) == '-' ||
-					pfs->flag == ' ')
+					pfs->sign == ' ')
 					pf_as_pad_insert(&(pfs->ascii_str), "0", 1);
 				else
 					pf_as_pad_insert(&(pfs->ascii_str), "0", 0);
@@ -64,7 +64,7 @@ void		pf_wchar_width(t_pfs *pfs)
 	int		width;
 	int		n;
 
-	pf_width_init(pfs, &widthm &n, 0);
+	pf_width_init(pfs, &width, &n, 0);
 	if (*(pfs->wchar_str) == L'\0' && pfs->ctyp == 'c')
 		++width;
 	if (n > width)
@@ -83,7 +83,7 @@ void		pf_wchar_width_comp(t_pfs *pfs)
 	int		width;
 	int		n;
 
-	pf_width_init(pfs, &widthm &n, 1);
+	pf_width_init(pfs, &width, &n, 1);
 	if (n == 0)
 		n = 1;
 	if (n > width)
@@ -91,12 +91,12 @@ void		pf_wchar_width_comp(t_pfs *pfs)
 		{
 			if (pfs->pads == 'l')
 				if (pfs->altf == 1 && (pfs->ctyp == 'x' || pfs->ctyp == 'X'))
-					pf_wc_pad_insert(&(pfs->wchar_str), L"0");
+					pf_wc_pad_insert(&(pfs->wchar_str), L"0", 2);
 				else if (*(pfs->wchar_str) == '+' || *(pfs->wchar_str) == '-' ||
-					pfs->flag == ' ')
-					pf_wc_pad_insert(&(pfs->wchar_str), L"0");
+					pfs->sign == ' ')
+					pf_wc_pad_insert(&(pfs->wchar_str), L"0", 1);
 				else
-					pf_wc_pad_insert(&(pfs->wchar_str), L"0");
+					pf_wc_pad_insert(&(pfs->wchar_str), L"0", 0);
 			else
 				pf_wc_pad_append(&(pfs->wchar_str), L"0");
 			--n;
@@ -105,9 +105,11 @@ void		pf_wchar_width_comp(t_pfs *pfs)
 		pfs->wchar_str[width] = L'\0';
 }
 
-void		pf_width_init(t_pfs *pfs, int *width, int *n, int switch)
+void		pf_width_init(t_pfs *pfs, int *width, int *n, int option)
 {
 	*n = pfs->mfwd;
-	width = (switch == 1) ?
-	((int)ft_strlen(pfs->ascii_str)) : ((int)ft_uni_strlen(pfs->wchar_str));
+	if (option == 1)
+		*width = (int)ft_strlen(pfs->ascii_str);
+	else
+		*width = (int)ft_wstrlen(pfs->wchar_str);
 }

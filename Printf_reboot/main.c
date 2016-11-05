@@ -10,80 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "printf.h"
-
-int			ft_printf(const char *restrict format, ...)
-{
-	int		n;
-	va_list	vl;
-
-	n = 0;
-	va_start(vl, format);
-	pf_loop(format, &vl, &n);
-	va_end(vl);
-	return (n);
-}
-
-static void	pf_loop(const char *restrict format, va_list *vl, int *n)
-{
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == 'n')
-				*(va_arg(*vl, int*)) = *n;
-			else
-			{
-				*n = *n + pf_read_and_display(format, vl);
-				while (ft_strchr(" .*#+-0123456789hjlLz") != NULL && *format)
-					format++;
-			}
-		}
-		else if (*format == '{')
-			pf_color((char **)(&format), n);
-		else
-		{
-			write(1, format, 1);
-			*n++;
-		}
-		if (*format)
-			format++;
-	}
-}
-
-static void	pf_color(char **format, int *n)
-{
-	if (pf_color_test(*format++) == 1)
-	{
-		while (**format != '}')
-			*format = *format++;
-	}
-	else
-	{
-		write(1, *format, 1);
-		*n++;
-	}
-}
-
-int			pf_color_test(const char *restrict format)
-{
-	int		i;
-	char	*s;
-
-	i = 0;
-	s = ft_strdup(format);
-	while (*s)
-	{
-		if (*s == '}')
-			*s-- = '\0';
-		*s++;
-	}
-	i = pf_color_mask(s);
-	free(s);
-	return (i);
-}
 
 static int	pf_color_mask(char *s)
 {
@@ -106,4 +33,79 @@ static int	pf_color_mask(char *s)
 	else
 		return (0);
 	return (1);
+}
+
+static int	pf_color_test(const char *restrict format)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	s = ft_strdup(format);
+	while (s[i])
+	{
+		if (s[i] == '}')
+		{
+			s[i] = '\0';
+			--i;
+		}
+		++i;
+	}
+	i = pf_color_mask(s);
+	free(s);
+	return (i);
+}
+
+static void	pf_color(char **format, int *n)
+{
+	if (pf_color_test(*format++) == 1)
+	{
+		while (**format != '}')
+			*format = *format + 1;
+	}
+	else
+	{
+		write(1, *format, 1);
+		*n = *n + 1;
+	}
+}
+
+static void	pf_loop(const char *restrict format, va_list *vl, int *n)
+{
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			++format;
+			if (*format == 'n')
+				*(va_arg(*vl, int*)) = *n;
+			else
+			{
+				*n = *n + pf_read_and_display(format, vl);
+				while (ft_strchr(PF_FC, *format) != NULL && *format)
+					++format;
+			}
+		}
+		else if (*format == '{')
+			pf_color((char **)(&format), n);
+		else
+		{
+			write(1, format, 1);
+			*n = *n + 1;
+		}
+		if (*format)
+			++format;
+	}
+}
+
+int			ft_printf(const char *restrict format, ...)
+{
+	int		n;
+	va_list	vl;
+
+	n = 0;
+	va_start(vl, format);
+	pf_loop(format, &vl, &n);
+	va_end(vl);
+	return (n);
 }

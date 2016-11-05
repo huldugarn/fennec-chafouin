@@ -33,10 +33,10 @@ char		**ft_unicode(unsigned long long int n)
 	return (NULL);
 }
 
-char		*ft_unimask2(char *b, int l)
+char		**ft_unimask2(char *b, int l)
 {
-	char	tab[2];
-	char	*p;
+	char	*tab[2];
+	char	**p;
 	int		i;
 	int		j;
 
@@ -57,10 +57,10 @@ char		*ft_unimask2(char *b, int l)
 	return (p);
 }
 
-char		*ft_unimask3(char *b, int l)
+char		**ft_unimask3(char *b, int l)
 {
-	char	tab[3];
-	char	*p;
+	char	*tab[3];
+	char	**p;
 	int		i;
 	int		j;
 
@@ -82,10 +82,10 @@ char		*ft_unimask3(char *b, int l)
 	return (p);
 }
 
-char		*ft_unimask4(char *b, int l)
+char		**ft_unimask4(char *b, int l)
 {
-	char	tab[4];
-	char	*p;
+	char	*tab[4];
+	char	**p;
 	int		i;
 	int		j;
 

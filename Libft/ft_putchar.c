@@ -12,19 +12,14 @@
 
 #include "libft.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putchar_fd(char c, int fd)
+void		ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
-void		ft_putwchar(wchar_t c)
+void		ft_putchar(char c)
 {
-	ft_putwchar_fd(c, 1);
+	write(1, &c, 1);
 }
 
 void		ft_putwchar_fd(wchar_t c, int fd)
@@ -46,4 +41,9 @@ void		ft_putwchar_fd(wchar_t c, int fd)
 			i++;
 		}
 	}
+}
+
+void		ft_putwchar(wchar_t c)
+{
+	ft_putwchar_fd(c, 1);
 }
