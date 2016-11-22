@@ -49,7 +49,6 @@ size_t		ft_wchar_width(wchar_t wchar)
 		width = 3;
 	else
 		width = 4;
-	free(&binlen);
 	return (width);
 }
 

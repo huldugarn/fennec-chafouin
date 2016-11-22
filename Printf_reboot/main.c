@@ -58,7 +58,7 @@ static int	pf_color_test(const char *restrict format)
 
 static void	pf_color(char **format, int *n)
 {
-	if (pf_color_test(*format++) == 1)
+	if (pf_color_test(*format + 1) == 1)
 	{
 		while (**format != '}')
 			*format = *format + 1;

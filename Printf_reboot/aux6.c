@@ -12,29 +12,29 @@
 
 #include "printf.h"
 
-void		pf_as_pad_insert(char **destination, char *insert, int position)
+void		pf_as_pad_insert(char **dest, char *insert, int position)
 {
 	char	*prefix;
 	char	*suffix;
 
-	prefix = ft_strndup(*destination, position);
-	suffix = ft_strdup(*destination + position);
-	*destination = ft_strjoin(prefix, insert);
+	prefix = ft_strndup(*dest, position);
+	suffix = ft_strdup(*dest + position);
+	*dest = ft_strjoin(prefix, insert);
 	free(prefix);
-	prefix = ft_strdup(*destination);
-	free(*destination);
-	*destination = ft_strjoin(prefix, suffix);
+	prefix = ft_strdup(*dest);
+	free(*dest);
+	*dest = ft_strjoin(prefix, suffix);
 	free(prefix);
 	free(suffix);
 }
 
-void		pf_as_pad_append(char **destination, char *insert)
+void		pf_as_pad_append(char **dest, char *insert)
 {
 	char	*prefix;
 
-	prefix = ft_strdup(*destination);
-	free(*destination);
-	*destination = ft_strjoin(prefix, insert);
+	prefix = ft_strdup(*dest);
+	free(*dest);
+	*dest = ft_strjoin(prefix, insert);
 	free(prefix);
 }
 
